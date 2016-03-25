@@ -18,12 +18,19 @@ table {
 .faceplant {
 	font-family: Arvo;
 	font-size: 13px;
+	color: #404040;
 }
 
 #logo {
-	font-size: 25px;
+	font-size: 50px;
+	color: #004d00;
+	letter-spacing: 2px;
 }
 
-#dropdowns {
-	padding-bottom: 10px;
+.subhead {
+	font-size: 20px;
+}
+
+.wrapper {
+	margin-bottom: 0px;
 }

@@ -6,7 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 
-	<body class="faceplant">
+	<body>
 		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT ;D'" onmouseout="this.innerHTML = 'FACEPLANT :D'">FACEPLANT :D</p>
 		<hr><hr>
 		<div class="searchColumn">

@@ -35,6 +35,7 @@
 	
 	if (strlen($attributeQuery) > 0) {
 		$attributeQuery = substr($attributeQuery, 0, strlen($attributeQuery) - 5);
+		$attributeQuery = ' where ' . $attributeQuery;
 	}
 	
 	echo($attributeQuery);
@@ -62,7 +63,7 @@
 // // Create connection to Oracle
 // $conn = oci_connect("ora_o1c0b", "a55307145", "ug");
 // 
-$query = '<br />select common_name from climate, soil, colour, plant where ' . $attributeQuery . ';';
+$query = '<br />select common_name from climate, soil, colour, plant' . $attributeQuery . ';';
 echo($query);
 // $stid = oci_parse($conn, $query);
 // $r = oci_execute($stid);

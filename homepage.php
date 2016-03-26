@@ -9,8 +9,8 @@
 	<body class="faceplant">
 		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT ;D'" onmouseout="this.innerHTML = 'FACEPLANT :D'">FACEPLANT :D</p>
 		<hr><hr>
-		<div>
-			<form style="padding-top: 20px;">
+		<div class="searchColumn">
+			<form>
 				<input type="text" name="firstname" placeholder="Name or cultivar">
 				&nbsp;<input type="submit" value="Search">
 			</form>
@@ -146,7 +146,9 @@
 		
 				<p class="subhead">Climate</p>
 				<div style="padding-bottom: 5px;">
-				<a style="padding-right: 10px;">Growth Period (Start)</a>
+					<a>Growth Period</a>
+				</div>
+				<div style="padding-bottom: 5px;">
 					<select name="growthperiodstart">
 						<option value="none" selected></option>
 						<option value="january">January</option>
@@ -162,10 +164,7 @@
 						<option value="november">November</option>
 						<option value="december">December</option>			
 					</select>
-				</div>
-				
-				<div style="padding-bottom: 5px;">
-				<a style="padding-right: 10px;">Growth Period (End)</a>
+					<a style="padding-left: 5px;padding-right: 5px;">to</a>
 					<select name="growthperiodend">
 						<option value="none" selected></option>
 						<option value="january">January</option>
@@ -184,13 +183,12 @@
 				</div>
 				
 				<div style="padding-bottom: 5px;">
-				<a style="padding-right: 10px;">Max Temperature</a>
-					<input type="text" name="maxtemp">
+				<a style="padding-right: 10px;">Temperature (C)</a>
 				</div>
-			
 				<div style="padding-bottom: 5px;">
-				<a style="padding-right: 10px;">Min Temperature</a>
-					<input type="text" name="mintemp">
+					<input type="text" name="mintemp" size="5" placeholder="Min">
+					<a style="padding-left: 5px;padding-right: 5px;">to</a>
+					<input type="text" name="maxtemp" size="5" placeholder="Max">
 				</div>
 			
 				<div style="padding-bottom: 5px;">
@@ -205,5 +203,90 @@
 				<p><input type="submit" value="Submit"></p>
 			</form>		
 		</div>
+		<div class="table">
+		<table style="width:100%;">
+  			<tr>
+				<td>Jill</td>
+				<td>Smith</td> 
+				<td>50</td>
+			  </tr>
+			  <tr>
+				<td>Eve</td>
+				<td>Jackson</td> 
+				<td>94</td>
+			  </tr>
+			  <tr>
+				<td>Jill</td>
+				<td>Smith</td> 
+				<td>50</td>
+			  </tr>
+			  <tr>
+				<td>Eve</td>
+				<td>Jackson</td> 
+				<td>94</td>
+			  </tr>
+			    			<tr>
+				<td>Jill</td>
+				<td>Smith</td> 
+				<td>50</td>
+			  </tr>
+			  <tr>
+				<td>Eve</td>
+				<td>Jackson</td> 
+				<td>94</td>
+			  </tr>
+			  <tr>
+				<td>Jill</td>
+				<td>Smith</td> 
+				<td>50</td>
+			  </tr>
+			  <tr>
+				<td>Eve</td>
+				<td>Jackson</td> 
+				<td>94</td>
+			  </tr>
+			    			<tr>
+				<td>Jill</td>
+				<td>Smith</td> 
+				<td>50</td>
+			  </tr>
+			  <tr>
+				<td>Eve</td>
+				<td>Jackson</td> 
+				<td>94</td>
+			  </tr>
+			  <tr>
+				<td>Jill</td>
+				<td>Smith</td> 
+				<td>50</td>
+			  </tr>
+			  <tr>
+				<td>Eve</td>
+				<td>Jackson</td> 
+				<td>94</td>
+			  </tr>
+			    			<tr>
+				<td>Jill</td>
+				<td>Smith</td> 
+				<td>50</td>
+			  </tr>
+			  <tr>
+				<td>Eve</td>
+				<td>Jackson</td> 
+				<td>94</td>
+			  </tr>
+			  <tr>
+				<td>Jill</td>
+				<td>Smith</td> 
+				<td>50</td>
+			  </tr>
+			  <tr>
+				<td>Eve</td>
+				<td>Jackson</td> 
+				<td>94</td>
+			  </tr>
+			</table>
+		</div>
+		
 	</body>
 </html>

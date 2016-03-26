@@ -7,7 +7,7 @@
 	</head>
 
 	<body class="faceplant">
-		<p class="wrapper" id="logo">FACEPLANT :D</p>
+		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT ;D'" onmouseout="this.innerHTML = 'FACEPLANT :D'">FACEPLANT :D</p>
 		<hr><hr>
 		<div>
 			<form style="padding-top: 20px;">

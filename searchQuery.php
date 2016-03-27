@@ -11,6 +11,7 @@
 	}
 	
 	$query = '<br />select common_name from plant' . $searchQuery . ';';
+	
 	echo($query);
 
 ?>

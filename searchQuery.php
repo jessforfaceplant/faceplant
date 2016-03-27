@@ -3,15 +3,16 @@
 
 <?php
 	$searchKey = $_REQUEST['plantname'];
+	$searchKey = strtolower($searchKey);
 	
 	//echo($searchKey);
 
 	$searchQuery = "";
 		
 	if (strlen($searchKey) > 0) {
-		$searchQuery = $searchQuery . ' and com_name like ' . '\'%' . $searchKey . '%\'';
-		$searchQuery = $searchQuery . ' or sci_name like ' . '\'%' . $searchKey . '%\'';
-		$searchQuery = $searchQuery . ' or cultivar like ' . '\'%' . $searchKey . '%\'';
+		$searchQuery = $searchQuery . ' and lower(com_name) like ' . '\'%' . $searchKey . '%\'';
+		$searchQuery = $searchQuery . ' or lower(sci_name) like ' . '\'%' . $searchKey . '%\'';
+		$searchQuery = $searchQuery . ' or lower(cultivar) like ' . '\'%' . $searchKey . '%\'';
 	}
 	
 	// Create connection to Oracle

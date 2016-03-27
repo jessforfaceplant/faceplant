@@ -204,7 +204,7 @@
 			</form>		
 		</div>
 		<div class="table">
-			<table style="width:100%;">
+			<table>
 				<tr>
 					<td>Jill</td>
 					<td>Smith</td> 

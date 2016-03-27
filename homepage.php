@@ -4,6 +4,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<link href='https://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="style.css" />
+		<script src="scripts.js"></script>
 	</head>
 
 	<body>
@@ -14,11 +15,11 @@
 				<input type="text" name="plantname" placeholder="Name or cultivar">
 				&nbsp;<input type="submit" value="Search">
 			</form>
-			<form id="attributeForm" action="attributeQuery.php">
+			<form id="attributeForm" action="">
 				<p class="subhead">General</p>
 				<div style="padding-bottom: 5px;">
 					<a style="padding-right: 10px;">Colour</a>
-					<select name="colour_name">
+					<select name="colour_name" id="colour_name">
 						<option value="none" selected></option>
 						<option value="blue">Blue</option>
 						<option value="red">Red</option>
@@ -28,7 +29,7 @@
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Edible</a>
-					<select name="edible">
+					<select name="edible" id="edible">
 						<option value="none" selected></option>
 						<option value="Y">Yes</option>
 						<option value="N">No</option>
@@ -37,7 +38,7 @@
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Medicinal</a>
-					<select name="medicinal">
+					<select name="medicinal" id="medicinal">
 						<option value="none" selected></option>
 						<option value="Y">Yes</option>
 						<option value="N">No</option>
@@ -46,7 +47,7 @@
 				
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Pet Safe</a>
-					<select name="petsafe">
+					<select name="petsafe" id="petsafe">
 						<option value="none" selected></option>
 						<option value="Y">Yes</option>
 						<option value="N">No</option>
@@ -55,7 +56,7 @@
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Width</a>
-					<select name="width">
+					<select name="width" id="width">
 						<option value="none" selected></option>
 						<option value="L">Low</option>
 						<option value="M">Medium</option>
@@ -65,7 +66,7 @@
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Height</a>
-					<select name="height">
+					<select name="height" id="height">
 						<option value="none" selected></option>
 						<option value="L">Low</option>
 						<option value="M">Medium</option>
@@ -76,7 +77,7 @@
 				<p class="subhead">Soil</p>
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">pH</a>
-					<select name="ph">
+					<select name="ph" id="ph">
 						<option value="none" selected></option>
 						<option value="L">Acidic</option>
 						<option value="M">Neutral</option>
@@ -86,7 +87,7 @@
 				
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Humus</a>
-					<select name="humus">
+					<select name="humus" id="humus">
 						<option value="none" selected></option>
 						<option value="L">Low</option>
 						<option value="M">Medium</option>
@@ -96,7 +97,7 @@
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Clay</a>
-					<select name="clay">
+					<select name="clay" id="clay">
 						<option value="none" selected></option>
 						<option value="L">Low</option>
 						<option value="M">Medium</option>
@@ -106,7 +107,7 @@
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Moisture</a>
-					<select name="moisture">
+					<select name="moisture" id="moisture">
 						<option value="none" selected></option>
 						<option value="L">Low</option>
 						<option value="M">Medium</option>
@@ -116,7 +117,7 @@
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Nitrogen</a>
-					<select name="n">
+					<select name="n" id="n">
 						<option value="none" selected></option>
 						<option value="L">Low</option>
 						<option value="M">Medium</option>
@@ -126,7 +127,7 @@
 				
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Phosphorus</a>
-					<select name="p">
+					<select name="p" id="p">
 						<option value="none" selected></option>
 						<option value="L">Low</option>
 						<option value="M">Medium</option>
@@ -136,7 +137,7 @@
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Potassium</a>
-					<select name="k">
+					<select name="k" id="k">
 						<option value="none" selected></option>
 						<option value="L">Low</option>
 						<option value="M">Medium</option>
@@ -149,7 +150,7 @@
 					<a>Growth Period</a>
 				</div>
 				<div style="padding-bottom: 5px;">
-					<select name="start">
+					<select name="growthperiod_start" id="growthperiod_start">
 						<option value="none" selected></option>
 						<option value="January">January</option>
 						<option value="February">February</option>
@@ -165,7 +166,7 @@
 						<option value="December">December</option>			
 					</select>
 					<a style="padding-left: 5px;padding-right: 5px;">to</a>
-					<select name="end">
+					<select name="growthperiod_end" id="growthperiod_end">
 						<option value="none" selected></option>
 						<option value="January">January</option>
 						<option value="February">February</option>
@@ -186,26 +187,24 @@
 				<a style="padding-right: 10px;">Temperature (C)</a>
 				</div>
 				<div style="padding-bottom: 5px;">
-					<input type="text" name="min" size="5" placeholder="Min">
+					<input type="text" name="temp_min" id="temp_min" size="5" placeholder="Min">
 					<a style="padding-left: 5px;padding-right: 5px;">to</a>
-					<input type="text" name="max" size="5" placeholder="Max">
+					<input type="text" name="temp_max" id="temp_max" size="5" placeholder="Max">
 				</div>
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Light</a>
-					<select name="light">
+					<select name="light" id="light">
 						<option value="none" selected></option>
 						<option value="L">Low</option>
 						<option value="M">Medium</option>
 						<option value="H">High</option>
 					</select>
 				</div>
-				<p><input type="submit" value="Submit"></p>
+				<p><input type="submit" name="submit" id="subbutt" value="Submit" /></p>
 			</form>		
 		</div>
-		<div class="table">
-			<table id="queryTable">
-			</table>
+		<div class="table" id="queryTable">
 		</div>
 	</body>
 </html>

@@ -1,4 +1,5 @@
 $(function() {
+	// Dropdown search
 	$("#attbutt").click(function() {
 		var colour_name = $("select#colour_name").val();
 		var edible = $("select#edible").val();
@@ -36,6 +37,7 @@ $(function() {
 		});
 		return false;
     });
+    // Text search
     $("#searchbutt").click(function() {
 		var plantname = $("input#plantname").val();
 		var dataString = 'plantname=' + plantname;
@@ -52,4 +54,6 @@ $(function() {
 		});
 		return false;
     });
+    // Load table of all plants on page load
+    $('#queryTable').load("allPlants.php");
 });

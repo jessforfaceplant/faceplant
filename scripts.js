@@ -1,5 +1,5 @@
 $(function() {
-	$("#subbutt").click(function() {
+	$("#attbutt").click(function() {
 		var colour_name = $("select#colour_name").val();
 		var edible = $("select#edible").val();
 		var medicinal = $("select#medicinal").val();
@@ -28,6 +28,22 @@ $(function() {
 		$.ajax({
 			type: "POST",
 			url: "attributeQuery.php",
+			data: dataString,
+			success: function( response ) {
+				//alert(response);
+				$('#queryTable').html(response);
+			}
+		});
+		return false;
+    });
+    $("#searchbutt").click(function() {
+		var plantname = $("input#plantname").val();
+		var dataString = 'plantname=' + plantname;
+
+		//alert (dataString);return false;
+		$.ajax({
+			type: "POST",
+			url: "searchQuery.php",
 			data: dataString,
 			success: function( response ) {
 				//alert(response);

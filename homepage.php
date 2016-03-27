@@ -12,8 +12,8 @@
 		<hr><hr>
 		<div class="searchColumn">
 			<form id="searchForm" action="searchQuery.php">
-				<input type="text" name="plantname" placeholder="Name or cultivar">
-				&nbsp;<input type="submit" value="Search">
+				<input type="text" name="plantname" id="plantname" placeholder="Name or cultivar">
+				&nbsp;<input type="submit" name="submit" id="searchbutt" value="Search" />
 			</form>
 			<form id="attributeForm" action="">
 				<p class="subhead">General</p>
@@ -201,7 +201,7 @@
 						<option value="H">High</option>
 					</select>
 				</div>
-				<p><input type="submit" name="submit" id="subbutt" value="Submit" /></p>
+				<input type="submit" name="submit" id="attbutt" value="Submit" />
 			</form>		
 		</div>
 		<div class="table" id="queryTable">

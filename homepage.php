@@ -10,11 +10,11 @@
 		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT ;D'" onmouseout="this.innerHTML = 'FACEPLANT :D'">FACEPLANT :D</p>
 		<hr><hr>
 		<div class="searchColumn">
-			<form>
-				<input type="text" name="firstname" placeholder="Name or cultivar">
+			<form id="searchForm" action="searchQuery.php">
+				<input type="text" name="plantname" placeholder="Name or cultivar">
 				&nbsp;<input type="submit" value="Search">
 			</form>
-			<form id="form" action="attributeQuery.php">
+			<form id="attributeForm" action="attributeQuery.php">
 				<p class="subhead">General</p>
 				<div style="padding-bottom: 5px;">
 					<a style="padding-right: 10px;">Colour</a>

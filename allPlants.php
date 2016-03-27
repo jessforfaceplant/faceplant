@@ -11,12 +11,12 @@
 	$stid = oci_parse($conn, $query);
 	$r = oci_execute($stid);
 	
-	$has_results = 0;
+		$numresults = 0;
 
 	// Fetch each row in an associative array
 	print '<table border="1">';
 	while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
-		$has_results = 1;
+		$numresults++;
 		print '<tr>';
 		foreach ($row as $item) {
 			print '<td>'.($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp').'</td>';
@@ -25,9 +25,14 @@
 	}
 	print '</table>';
 	
-	if ($has_results == 0) {
-		print '<p style="text-align:center;">The database is empty :(</p>';
+	if ($numresults == 0) {
+		print '<p style="text-align:center;">The database seems to be empty :(</p>';
 	}
-
+	elseif ($numresults == 1) {
+		print '<p style="text-align:center;">' . $numresults . ' plant</p>';
+	}
+	else {
+		print '<p style="text-align:center;">' . $numresults . ' plants</p>';
+	}
 ?>
 </html>

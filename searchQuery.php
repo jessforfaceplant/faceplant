@@ -46,6 +46,5 @@
 	else {
 		print '<p style="text-align:center;">' . $numresults . ' matches</p>';
 	}
-
 ?>
 </html>

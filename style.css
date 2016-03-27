@@ -35,6 +35,10 @@ div.table {
 	float: right;
 }
 
+#logo:hover {
+	color: #006d00;
+}
+
 #logo {
 	margin-top: 20px;
 	font-size: 50px;

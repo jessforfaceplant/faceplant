@@ -4,21 +4,22 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<link href='https://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="style.css" />
+		<script src="scripts.js"></script>
 	</head>
 
 	<body>
-		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT ;D'" onmouseout="this.innerHTML = 'FACEPLANT :D'">FACEPLANT :D</p>
+		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT ;D'" onmouseout="this.innerHTML = 'FACEPLANT :D'" onclick="javascript:location.href='homepage.php'">FACEPLANT :D</p>
 		<hr><hr>
 		<div class="searchColumn">
 			<form id="searchForm" action="searchQuery.php">
-				<input type="text" name="plantname" placeholder="Name or cultivar">
-				&nbsp;<input type="submit" value="Search">
+				<input type="text" name="plantname" id="plantname" placeholder="Name or cultivar">
+				&nbsp;<input type="submit" name="submit" id="searchbutt" value="Search" />
 			</form>
-			<form id="attributeForm" action="attributeQuery.php">
+			<form id="attributeForm" action="">
 				<p class="subhead">General</p>
 				<div style="padding-bottom: 5px;">
 					<a style="padding-right: 10px;">Colour</a>
-					<select name="colour">
+					<select name="colour_name" id="colour_name">
 						<option value="none" selected></option>
 						<option value="blue">Blue</option>
 						<option value="red">Red</option>
@@ -28,119 +29,119 @@
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Edible</a>
-					<select name="edible">
+					<select name="edible" id="edible">
 						<option value="none" selected></option>
-						<option value="yes">Yes</option>
-						<option value="no">No</option>
+						<option value="Y">Yes</option>
+						<option value="N">No</option>
 					</select>
 				</div>
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Medicinal</a>
-					<select name="medicinal">
+					<select name="medicinal" id="medicinal">
 						<option value="none" selected></option>
-						<option value="yes">Yes</option>
-						<option value="no">No</option>
+						<option value="Y">Yes</option>
+						<option value="N">No</option>
 					</select>
 				</div>
 				
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Pet Safe</a>
-					<select name="petsafe">
+					<select name="petsafe" id="petsafe">
 						<option value="none" selected></option>
-						<option value="yes">Yes</option>
-						<option value="no">No</option>
+						<option value="Y">Yes</option>
+						<option value="N">No</option>
 					</select>
 				</div>
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Width</a>
-					<select name="width">
+					<select name="width" id="width">
 						<option value="none" selected></option>
-						<option value="0-5">0-5</option>
-						<option value="5-10">5-10</option>
-						<option value="10+">10+</option>
+						<option value="L">Low</option>
+						<option value="M">Medium</option>
+						<option value="H">High</option>
 					</select>
 				</div>
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Height</a>
-					<select name="height">
+					<select name="height" id="height">
 						<option value="none" selected></option>
-						<option value="0-5">0-5</option>
-						<option value="5-10">5-10</option>
-						<option value="10+">10+</option>
+						<option value="L">Low</option>
+						<option value="M">Medium</option>
+						<option value="H">High</option>
 					</select>
 				</div>
 				
 				<p class="subhead">Soil</p>
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">pH</a>
-					<select name="pH">
+					<select name="ph" id="ph">
 						<option value="none" selected></option>
-						<option value="acidic">Acidic</option>
-						<option value="neutral">Neutral</option>
-						<option value="alkaline">Alkaline</option>
+						<option value="L">Acidic</option>
+						<option value="M">Neutral</option>
+						<option value="H">Alkaline</option>
 					</select>
 				</div>
 				
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Humus</a>
-					<select name="humus">
+					<select name="humus" id="humus">
 						<option value="none" selected></option>
-						<option value="low">Low</option>
-						<option value="medium">Medium</option>
-						<option value="high">High</option>
+						<option value="L">Low</option>
+						<option value="M">Medium</option>
+						<option value="H">High</option>
 					</select>
 				</div>
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Clay</a>
-					<select name="clay">
+					<select name="clay" id="clay">
 						<option value="none" selected></option>
-						<option value="low">Low</option>
-						<option value="medium">Medium</option>
-						<option value="high">High</option>
+						<option value="L">Low</option>
+						<option value="M">Medium</option>
+						<option value="H">High</option>
 					</select>
 				</div>
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Moisture</a>
-					<select name="moisture">
+					<select name="moisture" id="moisture">
 						<option value="none" selected></option>
-						<option value="low">Low</option>
-						<option value="medium">Medium</option>
-						<option value="high">High</option>
+						<option value="L">Low</option>
+						<option value="M">Medium</option>
+						<option value="H">High</option>
 					</select>
 				</div>
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Nitrogen</a>
-					<select name="nitrogen">
+					<select name="n" id="n">
 						<option value="none" selected></option>
-						<option value="low">Low</option>
-						<option value="medium">Medium</option>
-						<option value="high">High</option>
+						<option value="L">Low</option>
+						<option value="M">Medium</option>
+						<option value="H">High</option>
 					</select>
 				</div>
 				
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Phosphorus</a>
-					<select name="phosphorus">
+					<select name="p" id="p">
 						<option value="none" selected></option>
-						<option value="low">Low</option>
-						<option value="medium">Medium</option>
-						<option value="high">High</option>
+						<option value="L">Low</option>
+						<option value="M">Medium</option>
+						<option value="H">High</option>
 					</select>
 				</div>
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Potassium</a>
-					<select name="potassium">
+					<select name="k" id="k">
 						<option value="none" selected></option>
-						<option value="low">Low</option>
-						<option value="medium">Medium</option>
-						<option value="high">High</option>
+						<option value="L">Low</option>
+						<option value="M">Medium</option>
+						<option value="H">High</option>
 					</select>
 				</div>
 		
@@ -149,36 +150,36 @@
 					<a>Growth Period</a>
 				</div>
 				<div style="padding-bottom: 5px;">
-					<select name="growthperiodstart">
+					<select name="growthperiod_start" id="growthperiod_start">
 						<option value="none" selected></option>
-						<option value="january">January</option>
-						<option value="february">February</option>
-						<option value="march">March</option>
-						<option value="april">April</option>
-						<option value="may">May</option>
-						<option value="june">June</option>
-						<option value="july">July</option>
-						<option value="august">August</option>
-						<option value="september">September</option>
-						<option value="october">October</option>
-						<option value="november">November</option>
-						<option value="december">December</option>			
+						<option value="January">January</option>
+						<option value="February">February</option>
+						<option value="March">March</option>
+						<option value="April">April</option>
+						<option value="May">May</option>
+						<option value="June">June</option>
+						<option value="July">July</option>
+						<option value="August">August</option>
+						<option value="September">September</option>
+						<option value="October">October</option>
+						<option value="November">November</option>
+						<option value="December">December</option>			
 					</select>
 					<a style="padding-left: 5px;padding-right: 5px;">to</a>
-					<select name="growthperiodend">
+					<select name="growthperiod_end" id="growthperiod_end">
 						<option value="none" selected></option>
-						<option value="january">January</option>
-						<option value="february">February</option>
-						<option value="march">March</option>
-						<option value="april">April</option>
-						<option value="may">May</option>
-						<option value="june">June</option>
-						<option value="july">July</option>
-						<option value="august">August</option>
-						<option value="september">September</option>
-						<option value="october">October</option>
-						<option value="november">November</option>
-						<option value="december">December</option>			
+						<option value="January">January</option>
+						<option value="February">February</option>
+						<option value="March">March</option>
+						<option value="April">April</option>
+						<option value="May">May</option>
+						<option value="June">June</option>
+						<option value="July">July</option>
+						<option value="August">August</option>
+						<option value="September">September</option>
+						<option value="October">October</option>
+						<option value="November">November</option>
+						<option value="December">December</option>			
 					</select>
 				</div>
 				
@@ -186,106 +187,24 @@
 				<a style="padding-right: 10px;">Temperature (C)</a>
 				</div>
 				<div style="padding-bottom: 5px;">
-					<input type="text" name="mintemp" size="5" placeholder="Min">
+					<input type="text" name="temp_min" id="temp_min" size="5" placeholder="Min">
 					<a style="padding-left: 5px;padding-right: 5px;">to</a>
-					<input type="text" name="maxtemp" size="5" placeholder="Max">
+					<input type="text" name="temp_max" id="temp_max" size="5" placeholder="Max">
 				</div>
 			
 				<div style="padding-bottom: 5px;">
 				<a style="padding-right: 10px;">Light</a>
-					<select name="light">
+					<select name="light" id="light">
 						<option value="none" selected></option>
-						<option value="low">Low</option>
-						<option value="medium">Medium</option>
-						<option value="high">High</option>
+						<option value="L">Low</option>
+						<option value="M">Medium</option>
+						<option value="H">High</option>
 					</select>
 				</div>
-				<p><input type="submit" value="Submit"></p>
+				<input type="submit" name="submit" id="attbutt" value="Submit" />
 			</form>		
 		</div>
-		<div class="table">
-			<table>
-				<tr>
-					<td>Jill</td>
-					<td>Smith</td> 
-					<td>50</td>
-				</tr>
-				<tr>
-					<td>Eve</td>
-					<td>Jackson</td> 
-					<td>94</td>
-				</tr>
-				<tr>
-					<td>Jill</td>
-					<td>Smith</td> 
-					<td>50</td>
-				</tr>
-				<tr>
-					<td>Eve</td>
-					<td>Jackson</td> 
-					<td>94</td>
-				</tr>
-				<tr>
-					<td>Jill</td>
-					<td>Smith</td> 
-					<td>50</td>
-				</tr>
-				<tr>
-					<td>Eve</td>
-					<td>Jackson</td> 
-					<td>94</td>
-				</tr>
-				<tr>
-					<td>Jill</td>
-					<td>Smith</td> 
-					<td>50</td>
-				</tr>
-				<tr>
-					<td>Eve</td>
-					<td>Jackson</td> 
-					<td>94</td>
-				</tr>
-				<tr>
-					<td>Jill</td>
-					<td>Smith</td> 
-					<td>50</td>
-				</tr>
-				<tr>
-					<td>Eve</td>
-					<td>Jackson</td> 
-					<td>94</td>
-				</tr>
-				<tr>
-					<td>Jill</td>
-					<td>Smith</td> 
-					<td>50</td>
-				</tr>
-				<tr>
-					<td>Eve</td>
-					<td>Jackson</td> 
-					<td>94</td>
-				</tr>
-				<tr>
-					<td>Jill</td>
-					<td>Smith</td> 
-					<td>50</td>
-				</tr>
-				<tr>
-					<td>Eve</td>
-					<td>Jackson</td> 
-					<td>94</td>
-				</tr>
-				<tr>
-					<td>Jill</td>
-					<td>Smith</td> 
-					<td>50</td>
-				</tr>
-				<tr>
-					<td>Eve</td>
-					<td>Jackson</td> 
-					<td>94</td>
-				</tr>
-			</table>
+		<div class="table" id="queryTable">
 		</div>
 	</body>
 </html>

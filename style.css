@@ -67,24 +67,22 @@ div.table {
 }
 
 #names {
-	width: 30%;
+	width: 45%;
 	height: 140px;
 	float: left;
-}
-
-#options {
-	width: 70%;
-	height: 115px;
-	padding-top: 25px;
-	float: right;
+	clear: left;
 }
 
 #info {
-	width: 60%;
+	width: 45%;
+	padding-top: 20px;
+	float: right;
+	clear: right;
 }
 
 #rowHeader {
 	font-weight: bold;
+	width: 50%;
 }
 
 a:link, a:visited {

@@ -26,9 +26,9 @@
 
 			// Fetch each row in an associative array
 			while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
-				$com_name = $row['COM_NAME'];
-				$sci_name = $row['SCI_NAME'];
-				$cultivar = $row['CULTIVAR'];
+				$com_name = ucfirst($row['COM_NAME']);
+				$sci_name = ucfirst($row['SCI_NAME']);
+				$cultivar = ucfirst($row['CULTIVAR']);
 				$description = $row['DESCRIPTION'];
 				$edible = $row['EDIBLE'];
 				($edible == 'Y' ? $edible = 'Yes' : $edible = 'No');

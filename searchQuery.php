@@ -32,7 +32,7 @@
 		$plant_id = $row['PLANT_ID'];
 		print '<tr>';
 		foreach ($row as $item) {
-			print '<td>'. '<a href="profile.php?id=' . $plant_id . '">' . ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
+			print '<td>'. '<a href="profile.php?id=' . $plant_id . '">' . ($item !== null ? htmlentities(ucfirst($item), ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
 		}
 		print '</tr>';
 	}

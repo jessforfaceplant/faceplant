@@ -24,6 +24,10 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
+h1, h3 {
+	font-weight: normal;
+}
+
 table {
     border-collapse: collapse;
     width: 100%;
@@ -61,3 +65,14 @@ div.table {
 	clear: left;
 }
 
+#names {
+	width: 50%;
+	float: left;
+	clear: left;
+}
+
+#options {
+	width: 50%;
+	float: right;
+	clear: right;
+}

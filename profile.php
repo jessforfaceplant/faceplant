@@ -8,11 +8,21 @@
 	</head>
 
 	<body>
-		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT ;D'" onmouseout="this.innerHTML = 'FACEPLANT :D'">FACEPLANT :D</p>
+		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT ;D'" onmouseout="this.innerHTML = 'FACEPLANT :D'" onclick="javascript:location.href='homepage.php'">FACEPLANT :D</p>
 		<hr><hr>
-		<p id="com_name">Sunflower</p>
-		<p id="sci_name">Helianthus annus</p>
-		<p id="cultivar">Italian White</p>
+		<div id="names">
+			<h1 id="com_name">Sunflower</h1>
+			<h3 id="sci_name">Helianthus annus</h3>
+			<h3 id="cultivar">Italian White</h3>
+		</div>
+		<div id="options">
+			<form id="favourite" action="favourite.php">
+				<input type="submit" name="favourite" id="favebutt" value="Favourite" />
+			</form>
+			<form id="unfavourite" action="unfavourite.php">
+				<input type="submit" name="unfavourite" id="badbutt" value="Unfavourite" />
+			</form>
+		</div>
 		<p id="description">A tall North American plant of the daisy family, with very large golden-rayed flowers.</p>
 		<table style="width:100%">
 			<tr>
@@ -40,20 +50,36 @@
 				<td id="light">High</td> 
 			</tr>
 			<tr>
-				<td>Growth period</td>
-				<td id="growthperiod">April to September</td> 
+				<td>Growth period start</td>
+				<td id="growthperiod">April</td> 
 			</tr>
 			<tr>
-				<td>Temperature</td>
-				<td id="temperature">4C to 40C</td> 
+				<td>Growth period end</td>
+				<td id="growthperiod">September</td> 
+			</tr>
+			<tr>
+				<td>Minimum growing temperature</td>
+				<td id="temperature">4C</td> 
+			</tr>
+			<tr>
+				<td>Maximum growing temperature</td>
+				<td id="temperature">40C</td> 
 			</tr>
 			<tr>
 				<td>Moisture</td>
 				<td id="moisture">Medium</td> 
 			</tr>
 			<tr>
-				<td>N:P:K</td>
-				<td id="npk">L:M:M</td> 
+				<td>Nitrogen</td>
+				<td id="n">Low</td> 
+			</tr>
+			<tr>
+				<td>Phosphorus</td>
+				<td id="n">Medium</td> 
+			</tr>
+			<tr>
+				<td>Potassium</td>
+				<td id="n">Medium</td> 
 			</tr>
 			<tr>
 				<td>Humus</td>

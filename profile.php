@@ -25,9 +25,7 @@
 		</div>
 		<div id="info">
 			<p id="description">A tall North American plant of the daisy family, with very large golden-rayed flowers.</p>
-			<table id="infoTable" style="width:100%">
-				<col width="50%">
-  				<col width="50%">
+			<table id="infoTable" style="width:60%">
 				<tr>
 					<td id="rowHeader">Edible</td>
 					<td id="edible">Yes</td> 

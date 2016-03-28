@@ -5,7 +5,7 @@ html {
 
 body {
     font-family: Arvo;
-	font-size: 13px;
+	font-size: 14px;
 	color: #404040;
 	width: 1000px;
 	margin: auto;
@@ -52,6 +52,7 @@ div.table {
 
 .subhead {
 	font-size: 20px;
+	color: #1a1a1a;
 }
 
 .wrapper {
@@ -84,4 +85,25 @@ div.table {
 
 #rowHeader {
 	font-weight: bold;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: #404040;
+}
+
+a:hover {
+	color: #008000;
+}
+
+.div_row {
+  text-align: center;
+}
+
+.div_block {
+  display: inline-block;
+  text-align: left;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 50px;
 }

@@ -178,6 +178,11 @@
 		<hr><hr>
 		<div id="names">
 			<?php
+				print '<table><tr>';
+				foreach ($colour_array as $colour) {
+					print '<td id="colour" style="background-color:' . $colour . ';">&nbsp</td>';
+				}
+				print '</tr></table>';
 				print '<h1 id="com_name">' . $com_name . '</h1>';
 				print '<h3 id="sci_name">' . $sci_name . '</h3>';
 				print '<h3 id="cultivar">' . $cultivar . '</h3>';

@@ -5,7 +5,7 @@ html {
 
 body {
     font-family: Arvo;
-	font-size: 13px;
+	font-size: 14px;
 	color: #404040;
 	width: 1000px;
 	margin: auto;
@@ -22,6 +22,12 @@ th, td {
     font-size: 13px;
     border: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
+}
+
+#colour {
+    padding: 2px;
+    font-size: 5px;
+    border: 0px;
 }
 
 h1, h3 {
@@ -52,6 +58,7 @@ div.table {
 
 .subhead {
 	font-size: 20px;
+	color: #1a1a1a;
 }
 
 .wrapper {
@@ -66,22 +73,42 @@ div.table {
 }
 
 #names {
-	width: 30%;
+	width: 45%;
+	padding-top: 20px;
 	height: 140px;
 	float: left;
-}
-
-#options {
-	width: 70%;
-	height: 115px;
-	padding-top: 25px;
-	float: right;
+	clear: left;
 }
 
 #info {
-	width: 60%;
+	width: 45%;
+	padding-top: 20px;
+	float: right;
+	clear: right;
 }
 
 #rowHeader {
 	font-weight: bold;
+	width: 50%;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: #404040;
+}
+
+a:hover {
+	color: #008000;
+}
+
+.div_row {
+  text-align: center;
+}
+
+.div_block {
+  display: inline-block;
+  text-align: left;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 50px;
 }

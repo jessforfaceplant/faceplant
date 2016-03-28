@@ -66,13 +66,22 @@ div.table {
 }
 
 #names {
-	width: 50%;
+	width: 30%;
+	height: 140px;
 	float: left;
-	clear: left;
 }
 
 #options {
-	width: 50%;
+	width: 70%;
+	height: 115px;
+	padding-top: 25px;
 	float: right;
-	clear: right;
+}
+
+#info {
+	width: 60%;
+}
+
+#rowHeader {
+	font-weight: bold;
 }

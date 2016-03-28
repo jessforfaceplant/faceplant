@@ -23,82 +23,72 @@
 				<input type="submit" name="unfavourite" id="badbutt" value="Unfavourite" />
 			</form>
 		</div>
-		<p id="description">A tall North American plant of the daisy family, with very large golden-rayed flowers.</p>
-		<table style="width:100%">
-			<tr>
-				<td>Edible</td>
-				<td id="edible">Yes</td> 
-			</tr>
-			<tr>
-				<td>Medicinal</td>
-				<td id="medicinal">Yes</td> 
-			</tr>
-			<tr>
-				<td>Petsafe</td>
-				<td id="petsafe">Yes</td> 
-			</tr>
-			<tr>
-				<td>Height</td>
-				<td id="height">High</td> 
-			</tr>
-			<tr>
-				<td>Width</td>
-				<td id="width">High</td> 
-			</tr>
-			<tr>
-				<td>Light</td>
-				<td id="light">High</td> 
-			</tr>
-			<tr>
-				<td>Growth period start</td>
-				<td id="growthperiod">April</td> 
-			</tr>
-			<tr>
-				<td>Growth period end</td>
-				<td id="growthperiod">September</td> 
-			</tr>
-			<tr>
-				<td>Minimum growing temperature</td>
-				<td id="temperature">4C</td> 
-			</tr>
-			<tr>
-				<td>Maximum growing temperature</td>
-				<td id="temperature">40C</td> 
-			</tr>
-			<tr>
-				<td>Moisture</td>
-				<td id="moisture">Medium</td> 
-			</tr>
-			<tr>
-				<td>Nitrogen</td>
-				<td id="n">Low</td> 
-			</tr>
-			<tr>
-				<td>Phosphorus</td>
-				<td id="n">Medium</td> 
-			</tr>
-			<tr>
-				<td>Potassium</td>
-				<td id="n">Medium</td> 
-			</tr>
-			<tr>
-				<td>Humus</td>
-				<td id="humus">Medium</td> 
-			</tr>
-			<tr>
-				<td>Clay</td>
-				<td id="clay">Medium</td> 
-			</tr>
-			<tr>
-				<td>pH</td>
-				<td id="ph">Medium</td> 
-			</tr>
-		</table>
-		
-		<div class="searchColumn">
-			
-		</div>
-		<div>
+		<div id="info">
+			<p id="description">A tall North American plant of the daisy family, with very large golden-rayed flowers.</p>
+			<table id="infoTable" style="width:100%">
+				<col width="50%">
+  				<col width="50%">
+				<tr>
+					<td id="rowHeader">Edible</td>
+					<td id="edible">Yes</td> 
+				</tr>
+				<tr>
+					<td id="rowHeader">Medicinal</td>
+					<td id="medicinal">Yes</td> 
+				</tr>
+				<tr>
+					<td id="rowHeader">Petsafe</td>
+					<td id="petsafe">Yes</td> 
+				</tr>
+				<tr>
+					<td id="rowHeader">Height</td>
+					<td id="height">High</td> 
+				</tr>
+				<tr>
+					<td id="rowHeader">Width</td>
+					<td id="width">High</td> 
+				</tr>
+				<tr>
+					<td id="rowHeader">Light</td>
+					<td id="light">High</td> 
+				</tr>
+				<tr>
+					<td id="rowHeader">Growth period</td>
+					<td id="growthperiod">April to September</td> 
+				</tr>
+				<tr>
+					<td id="rowHeader">Growing temperature</td>
+					<td id="temperature">4C to 40C</td> 
+				</tr>
+				<tr>
+					<td id="rowHeader">Moisture</td>
+					<td id="moisture">Medium</td> 
+				</tr>
+				<tr>
+					<td id="rowHeader">Nitrogen</td>
+					<td id="n">Low</td> 
+				</tr>
+				<tr>
+					<td id="rowHeader">Phosphorus</td>
+					<td id="n">Medium</td> 
+				</tr>
+				<tr>
+					<td id="rowHeader">Potassium</td>
+					<td id="n">Medium</td> 
+				</tr>
+				<tr>
+					<td id="rowHeader">Humus</td>
+					<td id="humus">Medium</td> 
+				</tr>
+				<tr>
+					<td id="rowHeader">Clay</td>
+					<td id="clay">Medium</td> 
+				</tr>
+				<tr>
+					<td id="rowHeader">pH</td>
+					<td id="ph">Medium</td> 
+				</tr>
+			</table>
 		</div>
 	</body>
 </html>

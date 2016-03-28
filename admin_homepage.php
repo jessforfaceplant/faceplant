@@ -11,23 +11,29 @@
 		<hr><hr>
 		<div class="divrow">
 			<form id="attributeForm" action="">
-				<p class="subhead">General</p>
+				<p class="subhead">Names/Description</p>
 				<div style="padding-bottom: 10px;">
-					Plant ID: <input type="text" name="plant_id" id="plant_id">
+					<a style="padding-right: 10px;">Plant ID:</a>
+					<input type="text" name="plant_id" id="plant_id">
 				</div>
 				<div style="padding-bottom: 10px;">
-					Common Name: <input type="text" name="commonname" id="commonname">
+					<a style="padding-right: 10px;">Common Name:</a>
+					<input type="text" name="commonname" id="commonname">
 				</div>
 				<div style="padding-bottom: 10px;">
-					Scientific Name: <input type="text" name="sciname" id="sciname">
+					<a style="padding-right: 10px;">Scientific Name:</a>
+					<input type="text" name="sciname" id="sciname">
 				</div>
 				<div style="padding-bottom: 10px;">
-					Cultivar: <input type="text" name="cultivar" id="cultivar">
+					<a style="padding-right: 10px;">Cultivar:</a>
+					<input type="text" name="cultivar" id="cultivar">
 				</div>
 				<div>Description:
 					<p><textarea rows="4" cols="50" name="description" form="">Enter description here...
 					</textarea></p>
 				</div>
+											
+				<p class="subhead">General</p>
 				<div style="padding-bottom: 10px;">
 					<a style="padding-right: 10px;">Colour</a>
 					<select name="colour_name" id="colour_name">
@@ -37,7 +43,7 @@
 						<option value="yellow">Yellow</option>
 					</select>
 				</div>
-			
+
 				<div style="padding-bottom: 10px;">
 				<a style="padding-right: 10px;">Edible</a>
 					<select name="edible" id="edible">
@@ -87,7 +93,8 @@
 				
 				<p class="subhead">Soil</p>
 				<div style="padding-bottom: 10px;">
-					Soil ID: <input type="text" name="soil_id" id="soil_id">
+					<a style="padding-right: 10px;">Soil ID:</a>
+					<input type="text" name="soil_id" id="soil_id">
 				</div>
 				<div style="padding-bottom: 10px;">
 				<a style="padding-right: 10px;">pH</a>
@@ -161,7 +168,8 @@
 		
 				<p class="subhead">Climate</p>
 				<div style="padding-bottom: 10px;">
-					Climate ID: <input type="text" name="climate_id" id="climate_id">
+					<a style="padding-right: 10px;">Climate ID:</a>
+					<input type="text" name="climate_id" id="climate_id">
 				</div>
 				<div style="padding-bottom: 10px;">
 					<a>Growth Period</a>

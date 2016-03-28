@@ -85,3 +85,15 @@ a:link, a:visited {
 a:hover {
 	color: #008000;
 }
+
+.div_row {
+  text-align: center;
+}
+
+.div_block {
+  display: inline-block;
+  text-align: left;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 50px;
+}

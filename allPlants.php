@@ -11,7 +11,7 @@
 	$stid = oci_parse($conn, $query);
 	$r = oci_execute($stid);
 	
-		$numresults = 0;
+	$numresults = 0;
 
 	// Fetch each row in an associative array
 	print '<table border="1">';
@@ -19,7 +19,7 @@
 		$numresults++;
 		print '<tr>';
 		foreach ($row as $item) {
-			print '<td>'. '<a href="profile.php">' . ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
+			print '<td>'. '<a href="profile.php?name=' . ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp') . '">' . ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
 		}
 		print '</tr>';
 	}

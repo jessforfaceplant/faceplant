@@ -76,3 +76,12 @@ div.table {
 	float: right;
 	clear: right;
 }
+
+a:link, a:visited {
+    text-decoration: none;
+    color: #404040;
+}
+
+a:hover {
+	color: #008000;
+}

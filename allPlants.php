@@ -19,7 +19,7 @@
 		$numresults++;
 		print '<tr>';
 		foreach ($row as $item) {
-			print '<td>'.($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp').'</td>';
+			print '<td>'. '<a href="profile.php">' . ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
 		}
 		print '</tr>';
 	}

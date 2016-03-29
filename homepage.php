@@ -306,17 +306,23 @@
 		<?php
 			$numresults = 0;
 			// Fetch each row in an associative array
+			print '<form action="favourite.php" method="get">';
 			print '<table border="1">';
 			while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
 				$numresults++;
 				$plant_id = $row['PLANT_ID'];
 				print '<tr>';
+				print '<td style="text-align:center"><input type="checkbox" name="favourite" id="favourite" value="' . $plant_id . '"></td>';
 				foreach ($row as $item) {
-					print '<td>'. '<a href="profile.php?id=' . $plant_id . '">' . ($item !== null ? htmlentities(ucfirst($item), ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
+					if ($item != $plant_id) {
+						print '<td>'. '<a href="profile.php?id=' . $plant_id . '">' . ($item !== null ? htmlentities(ucfirst($item), ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
+					}
 				}
 				print '</tr>';
 			}
 			print '</table>';
+			print '<input type="submit" value="Add to favourites">';
+			print '</form>';
 	
 			if ($numresults == 0) {
 				print '<p style="text-align:center;">No plants match your query :(</p>';

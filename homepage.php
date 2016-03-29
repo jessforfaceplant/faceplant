@@ -55,8 +55,11 @@
 		<hr><hr>
 		<div class="searchColumn">
 			<form id="searchForm" action="homepage.php">
-				<input type="text" name="plantname" id="plantname" placeholder="Name or cultivar">
-				&nbsp;<input type="submit" name="submit" id="searchbutt" value="Search" />
+				<?php
+					$searched_name = $_GET['plantname'];
+					print '<input type="text" name="plantname" id="plantname" placeholder="Name or cultivar" value="' . $searched_name . '">';
+					print '&nbsp;<input type="submit" name="submit" id="searchbutt" value="Search" />';
+				?>
 			</form>
 			<form id="attributeForm" action="">
 				<p class="subhead">General</p>

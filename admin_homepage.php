@@ -7,7 +7,7 @@
 	</head>
 
 	<body>
-		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT ;D'" onmouseout="this.innerHTML = 'FACEPLANT ~*ADMIN*~'" onclick="javascript:location.href='homepage.php'">FACEPLANT ~*ADMIN*~</p>
+		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT *~ADMIN~*'" onmouseout="this.innerHTML = 'FACEPLANT ~*ADMIN*~'" onclick="javascript:location.href='homepage.php'">FACEPLANT ~*ADMIN*~</p>
 		<hr><hr>
 		<div class="divrow">
 			<form id="attributeForm" action="">
@@ -29,8 +29,7 @@
 					<input type="text" name="cultivar" id="cultivar">
 				</div>
 				<div>Description:
-					<p><textarea rows="4" cols="50" name="description" form="">Enter description here...
-					</textarea></p>
+					<p><textarea rows="4" cols="50" name="description" placeholder="Enter description here..." form=""></textarea></p>
 				</div>
 											
 				<p class="subhead">General</p>

@@ -24,6 +24,12 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
+#colour {
+    padding: 2px;
+    font-size: 5px;
+    border: 0px;
+}
+
 h1, h3 {
 	font-weight: normal;
 }
@@ -67,15 +73,23 @@ div.table {
 }
 
 #names {
-	width: 50%;
+	width: 45%;
+	padding-top: 20px;
+	height: 140px;
 	float: left;
 	clear: left;
 }
 
-#options {
-	width: 50%;
+#info {
+	width: 45%;
+	padding-top: 20px;
 	float: right;
 	clear: right;
+}
+
+#rowHeader {
+	font-weight: bold;
+	width: 50%;
 }
 
 a:link, a:visited {

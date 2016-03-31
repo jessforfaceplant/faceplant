@@ -5,12 +5,44 @@
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<script src="scripts.js"></script>
 	</head>
+	
+	<?php
+		if (sizeof($_GET) == 0) {
+			$query_cond = '';
+		}
+		else {
+			$tupleKeys = array('plant_id','com_name','sci_name','cultivar','description','colour_name', 'edible', 'medicinal', 'petsafe', 'width', 'height', 'ph', 'humus', 'clay', 
+			'moisture', 'n', 'p', 'k', 'growthperiod_start', 'growthperiod_end', 'temp_max', 'temp_min', 'light');
+	
+			$tupleQuery = "";
+	
+			for ($x = 0; $x < sizeof($tupleKeys); $x++) {
+				if ($_REQUEST[$tupleKeys[$x]] == 'none' || $_REQUEST[$tupleKeys[$x]] == ''  || $_REQUEST[$tupleKeys[$x]] == 'undefined') {
+					$_REQUEST[$tupleKeys[$x]] = "null";
+				} 
+				$tupleQuery = $tupleQuery . $_REQUEST[$tupleKeys[$x]] . ', ';
+			}
+
+			if (strlen($tupleQuery) > 0) {
+				$tupleQuery = substr($tupleQuery, 0, strlen($tupleQuery) - 2);
+			}
+			$query_cond = $tupleQuery;
+		}
+		
+		// Create connection to Oracle
+// 		$conn = oci_connect("ora_o1c0b", "a55307145", "ug");
+
+		$query = 'insert into plants values (' . $tupleQuery . ')';
+		echo $query;
+		$stid = oci_parse($conn, $query);
+		$r = oci_execute($stid);
+	?>
 
 	<body>
 		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT *~ADMIN~*'" onmouseout="this.innerHTML = 'FACEPLANT ~*ADMIN*~'" onclick="javascript:location.href='homepage.php'">FACEPLANT ~*ADMIN*~</p>
 		<hr><hr>
 		<div class="divrow">
-			<form id="attributeForm" action="">
+			<form id="tupleForm" action="admin_homepage.php">
 				<p class="subhead">Names/Description</p>
 				<div style="padding-bottom: 10px;">
 					<a style="padding-right: 10px;">Plant ID:</a>
@@ -18,11 +50,11 @@
 				</div>
 				<div style="padding-bottom: 10px;">
 					<a style="padding-right: 10px;">Common Name:</a>
-					<input type="text" name="commonname" id="commonname">
+					<input type="text" name="com_name" id="com_name">
 				</div>
 				<div style="padding-bottom: 10px;">
 					<a style="padding-right: 10px;">Scientific Name:</a>
-					<input type="text" name="sciname" id="sciname">
+					<input type="text" name="sci_name" id="sci_name">
 				</div>
 				<div style="padding-bottom: 10px;">
 					<a style="padding-right: 10px;">Cultivar:</a>

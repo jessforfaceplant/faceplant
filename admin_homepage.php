@@ -45,7 +45,7 @@
 			// //Create connection to Oracle
 			$conn = oci_connect("ora_o1c0b", "a55307145", "ug");
 
-			$stid = oci_parse($conn, $plantQuery);
+			$stid = oci_parse($conn, $deleteQuery);
 			$success = oci_execute($stid);
 		}
  		

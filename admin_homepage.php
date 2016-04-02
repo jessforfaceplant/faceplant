@@ -7,35 +7,80 @@
 	</head>
 	
 	<?php
-		if (sizeof($_GET) == 0) {
-			$query_cond = '';
-		}
-		else {
-			$tupleKeys = array('plant_id','com_name','sci_name','cultivar','description','colour_name', 'edible', 'medicinal', 'petsafe', 'width', 'height', 'ph', 'humus', 'clay', 
-			'moisture', 'n', 'p', 'k', 'growthperiod_start', 'growthperiod_end', 'temp_max', 'temp_min', 'light');
-	
-			$tupleQuery = "";
-	
-			for ($x = 0; $x < sizeof($tupleKeys); $x++) {
-				if ($_REQUEST[$tupleKeys[$x]] == 'none' || $_REQUEST[$tupleKeys[$x]] == ''  || $_REQUEST[$tupleKeys[$x]] == 'undefined') {
-					$_REQUEST[$tupleKeys[$x]] = "null";
-				} 
-				$tupleQuery = $tupleQuery . $_REQUEST[$tupleKeys[$x]] . ', ';
-			}
+		$plantKeys = array('plant_id','com_name','sci_name','cultivar','description','colour_name', 'edible', 'medicinal', 'petsafe', 'width', 'height');
+		$soilKeys = array('ph', 'humus', 'clay', 'moisture', 'n', 'p', 'k');
+		$climateKeys = array('growthperiod_start', 'growthperiod_end', 'temp_max', 'temp_min', 'light');
 
-			if (strlen($tupleQuery) > 0) {
-				$tupleQuery = substr($tupleQuery, 0, strlen($tupleQuery) - 2);
-			}
-			$query_cond = $tupleQuery;
+		// Plant query
+		$plantQuery = "";
+		for ($x = 0; $x < sizeof($plantKeys); $x++) {
+			if ($_REQUEST[$plantKeys[$x]] == 'none' || $_REQUEST[$plantKeys[$x]] == ''  || $_REQUEST[$plantKeys[$x]] == 'undefined') {
+				$success = 0;
+				echo("Missing field" . $plantKeys[$x]);
+			} 
+			$plantQuery = $plantQuery . $_REQUEST[$plantKeys[$x]] . ', ';
+		}
+		if (strlen($plantQuery) > 0) {
+			$plantQuery = substr($plantQuery, 0, strlen($plantQuery) - 2);
 		}
 		
-		// Create connection to Oracle
-// 		$conn = oci_connect("ora_o1c0b", "a55307145", "ug");
+		// Soil query
+		$soilQuery = "";
+		for ($x = 0; $x < sizeof($soilKeys); $x++) {
+			if ($_REQUEST[$soilKeys[$x]] == 'none' || $_REQUEST[$soilKeys[$x]] == ''  || $_REQUEST[$soilKeys[$x]] == 'undefined') {
+				$success = 0;
+				echo("Missing field" . $soilKeys[$x]);
+			} 
+			$soilQuery = $soilQuery . $_REQUEST[$soilKeys[$x]] . ', ';
+		}
+		if (strlen($soilQuery) > 0) {
+			$soilQuery = substr($soilQuery, 0, strlen($soilQuery) - 2);
+		}
+		
+		// Climate query
+		$climateQuery = "";
+		for ($x = 0; $x < sizeof($climateKeys); $x++) {
+			if ($_REQUEST[$climateKeys[$x]] == 'none' || $_REQUEST[$climateKeys[$x]] == ''  || $_REQUEST[$climateKeys[$x]] == 'undefined') {
+				$success = 0;
+				echo("Missing field" . $climateKeys[$x]);
+			} 
+			$climateQuery = $climateQuery . $_REQUEST[$climateKeys[$x]] . ', ';
+		}
+		if (strlen($climateQuery) > 0) {
+			$climateQuery = substr($climateQuery, 0, strlen($climateQuery) - 2);
+		}
+		
+		echo($plantQuery);
+		echo($soilQuery);
+		echo($climateQuery);
+		
+		Create connection to Oracle
+ 		$conn = oci_connect("ora_o1c0b", "a55307145", "ug");
 
-		$query = 'insert into plants values (' . $tupleQuery . ')';
+		// Does this soil already exist?
+		$soilQuery = 'insert into soils values (' . $tupleQuery . ')';
 		echo $query;
 		$stid = oci_parse($conn, $query);
 		$r = oci_execute($stid);
+		
+		<?php
+		// Fetch each row in an associative array;
+		while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
+			$numresults++;
+			$plant_id = $row['PLANT_ID'];
+			print '<tr>';
+			print '<td style="text-align:center"><input type="checkbox" name="favourite" id="favourite" value="' . $plant_id . '"></td>';
+			foreach ($row as $item) {
+				if ($item != $plant_id) {
+					print '<td>'. '<a href="profile.php?id=' . $plant_id . '">' . ($item !== null ? htmlentities(ucfirst($item), ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
+				}
+			}
+		}
+		
+
+		
+		
+
 	?>
 
 	<body>
@@ -61,7 +106,7 @@
 					<input type="text" name="cultivar" id="cultivar">
 				</div>
 				<div>Description:
-					<p><textarea rows="4" cols="50" name="description" placeholder="Enter description here..." form=""></textarea></p>
+					<p><textarea rows="4" cols="50" name="description" placeholder="Enter description here..." id="description" form="tupleForm"></textarea></p>
 				</div>
 											
 				<p class="subhead">General</p>
@@ -123,10 +168,6 @@
 				</div>
 				
 				<p class="subhead">Soil</p>
-				<div style="padding-bottom: 10px;">
-					<a style="padding-right: 10px;">Soil ID:</a>
-					<input type="text" name="soil_id" id="soil_id">
-				</div>
 				<div style="padding-bottom: 10px;">
 				<a style="padding-right: 10px;">pH</a>
 					<select name="ph" id="ph">
@@ -199,10 +240,6 @@
 		
 				<p class="subhead">Climate</p>
 				<div style="padding-bottom: 10px;">
-					<a style="padding-right: 10px;">Climate ID:</a>
-					<input type="text" name="climate_id" id="climate_id">
-				</div>
-				<div style="padding-bottom: 10px;">
 					<a>Growth Period</a>
 				</div>
 				<div style="padding-bottom: 10px;">
@@ -261,6 +298,16 @@
 					<input type="submit" name="submit" id="addplant" value="Add Plant" />
 				</div>
 			</form>		
+		    <form id="deleteForm" action="admin_homepage.php">
+				<p class="subhead">Delete Plant</p>
+				<div style="padding-bottom: 10px;">
+					<a style="padding-right: 10px;">Plant ID:</a>
+					<input type="text" name="plant_id" id="plant_id">
+				</div>
+				<div style="padding-top: 10px;">
+					<input type="submit" name="submit" id="deleteplant" value="Delete Plant" />
+				</div>
+			</form>
 		</div>
 		</div>
 	</body>

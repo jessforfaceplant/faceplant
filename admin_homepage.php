@@ -36,6 +36,18 @@
 		
 			//echo("<br> this is success:" . $success);
 		}
+		if($_GET['submit'] == "Delete Plant") {
+			
+			$deleteQuery = 'delete from plants where plant_id = ' . $_REQUEST['plant_id'];
+		
+			echo($deleteQuery);
+		
+			// //Create connection to Oracle
+			$conn = oci_connect("ora_o1c0b", "a55307145", "ug");
+
+			$stid = oci_parse($conn, $plantQuery);
+			$success = oci_execute($stid);
+		}
  		
 
 		// Fetch each row in an associative array;
@@ -154,7 +166,12 @@
 		</div>
 		<div id="info" style="padding-top:50px;">
 			<?php
+			if ($_GET['submit'] == "Update Plant") {
 				echo($success ? "Update successful" : "Your update failed a constraint");
+			}
+			if ($_GET['submit'] == "Delete Plant") {
+				echo($success ? "Delete successful" : "Your update failed a constraint");
+			}
 			?>
 		</div>
 	</body>

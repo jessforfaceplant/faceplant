@@ -77,9 +77,15 @@
 						<?php
 							$selected_colour = $_GET['colour_name'];
 							print '<option value="none" selected></option>';
-							print '<option value="blue"' . ($selected_colour == "blue" ? 'selected' : '') . '>Blue</option>';
 							print '<option value="red"' . ($selected_colour == "red" ? 'selected' : '') . '>Red</option>';
+							print '<option value="orange"' . ($selected_colour == "orange" ? 'selected' : '') . '>Orange</option>';
 							print '<option value="yellow"' . ($selected_colour == "yellow" ? 'selected' : '') . '>Yellow</option>';
+							print '<option value="green"' . ($selected_colour == "green" ? 'selected' : '') . '>Green</option>';
+							print '<option value="blue"' . ($selected_colour == "blue" ? 'selected' : '') . '>Blue</option>';
+							print '<option value="indigo"' . ($selected_colour == "indigo" ? 'selected' : '') . '>Indigo</option>';
+							print '<option value="violet"' . ($selected_colour == "violet" ? 'selected' : '') . '>Violet</option>';
+							print '<option value="white"' . ($selected_colour == "red" ? 'selected' : '') . '>White</option>';
+							print '<option value="black"' . ($selected_colour == "black" ? 'selected' : '') . '>Black</option>';
 						?>
 					</select>
 				</div>
@@ -314,36 +320,42 @@
 		<?php
 			$numresults = 0;
 			// Fetch each row in an associative array
-			print '<form action="favourite.php" method="get">';
-			print '<table>';
-			print '<tr><td style="background-color: #d9d9d9;"></td>';
-			print '<td style="background-color: #d9d9d9;">Common Name</td>';
-			print '<td style="background-color: #d9d9d9;">Scientific Name</td>';
-			print '<td style="background-color: #d9d9d9;">Cultivar</td></tr>';
-			while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
-				$numresults++;
-				$plant_id = $row['PLANT_ID'];
-				print '<tr>';
-				print '<td style="text-align:center"><input type="checkbox" name="favourite" id="favourite" value="' . $plant_id . '"></td>';
-				foreach ($row as $item) {
-					if ($item != $plant_id) {
-						print '<td>'. '<a href="profile.php?id=' . $plant_id . '">' . ($item !== null ? htmlentities(ucfirst($item), ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
+			if ($r == 1) {
+				print '<form action="favourite.php" method="get">';
+				print '<table>';
+				print '<tr><td style="background-color: #d9d9d9;"></td>';
+				print '<td style="background-color: #d9d9d9;">Common Name</td>';
+				print '<td style="background-color: #d9d9d9;">Scientific Name</td>';
+				print '<td style="background-color: #d9d9d9;">Cultivar</td></tr>';
+				while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
+					$numresults++;
+					$plant_id = $row['PLANT_ID'];
+					print '<tr>';
+					print '<td style="text-align:center"><input type="checkbox" name="favourite" id="favourite" value="' . $plant_id . '"></td>';
+					foreach ($row as $item) {
+						if ($item != $plant_id) {
+							print '<td>'. '<a href="profile.php?id=' . $plant_id . '">' . ($item !== null ? htmlentities(ucfirst($item), ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
+						}
 					}
+					print '</tr>';
 				}
-				print '</tr>';
-			}
-			print '</table>';
-			print '<input style="margin-top: 10px;" type="submit" value="Add to favourites">';
-			print '</form>';
+				print '</table>';
+				if ($numresults != 0) {
+					print '<input style="margin-top: 10px;" type="submit" value="Add to favourites">';
+				}
+				print '</form>';
 	
-			if ($numresults == 0) {
-				print '<p style="text-align:center;">No plants match your query :(</p>';
-			}
-			elseif ($numresults == 1) {
-				print '<p style="text-align:center;">' . $numresults . ' plant</p>';
-			}
-			else {
-				print '<p style="text-align:center;">' . $numresults . ' plants</p>';
+				if ($numresults == 0) {
+					print '<p style="text-align:center;">No plants match your query :(</p>';
+				}
+				else if ($numresults == 1) {
+					print '<p style="text-align:center;">' . $numresults . ' plant</p>';
+				}
+				else {
+					print '<p style="text-align:center;">' . $numresults . ' plants</p>';
+				}
+			} else {
+				print '<p style="text-align:center;">There was an error with your query :(</p>';
 			}
 		?>
 		</div>

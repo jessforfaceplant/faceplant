@@ -71,6 +71,11 @@
 
 	<body>
 		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT *~ADMIN~*'" onmouseout="this.innerHTML = 'FACEPLANT ~*ADMIN*~'" onclick="javascript:location.href='homepage.php'">FACEPLANT ~*ADMIN*~</p>
+		<div class="wrapper" id="nav" style="padding-top:10px;padding-bottom:10px;">
+			<a href="stats.php" style="padding-right:15px;">Stats</a>
+			<a href="colour_picker.php" style="padding-right:15px;">Colour Picker</a>
+			<a href="admin_homepage.php" style="padding-right:15px;">Admin</a>
+		</div>
 		<hr><hr>
 		<div id="names">
 			<form id="tupleForm" action="admin_homepage.php">

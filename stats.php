@@ -41,6 +41,11 @@
 	
 	<body>
 		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT *~STATS~*'" onmouseout="this.innerHTML = 'FACEPLANT ~*STATS*~'" onclick="javascript:location.href='homepage.php'">FACEPLANT ~*STATS*~</p>
+		<div class="wrapper" id="nav" style="padding-top:10px;padding-bottom:10px;">
+			<a href="stats.php" style="padding-right:15px;">Stats</a>
+			<a href="colour_picker.php" style="padding-right:15px;">Colour Picker</a>
+			<a href="admin_homepage.php" style="padding-right:15px;">Admin</a>
+		</div>
 		<hr>
 		<hr>
 		

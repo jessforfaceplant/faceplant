@@ -11,12 +11,14 @@
 		
 		if(strlen($_SERVER['QUERY_STRING']) >= 0) {
 			$colour_querry_arr = array();
+			$selectedColours = array();
 		
 			$arg_array = explode("&", $_SERVER['QUERY_STRING']);
 			foreach ($arg_array as $arg) {
 				$pair = explode("=", $arg);
 				if ($pair[0] == 'colour_name') {
 					$colour_querry_arr[] = "insert into temp_colours values ('" . $pair[1] . "')";
+					$selectedColours[] = $pair[1];
 				}
 			}
 
@@ -62,15 +64,17 @@
 		<div class="searchColumn">
 			<p class="subhead" style="padding-right: 30px;">What colours do you look for in a plant?</p>			
 			<form action="colour_picker.php">
-				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="red">Red</a><br>
-				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="orange">Orange</a><br>
-				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="yellow">Yellow</a><br>
-				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="green">Green</a><br>
-				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="blue">Blue</a><br>
-				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="indigo">Indigo</a><br>
-				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="violet">Violet</a><br>
-				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="white">White</a><br>
-				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="black">Black</a><br>
+				<?php
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="red"' . (in_array("red", $selectedColours) ? "checked" : "") . '>Red</a><br>';
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="orange"' . (in_array("orange", $selectedColours) ? "checked" : "") . '>Orange</a><br>';
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="yellow"' . (in_array("yellow", $selectedColours) ? "checked" : "") . '>Yellow</a><br>';
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="green"' . (in_array("green", $selectedColours) ? "checked" : "") . '>Green</a><br>';
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="blue"' . (in_array("blue", $selectedColours) ? "checked" : "") . '>Blue</a><br>';
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="indigo"' . (in_array("indigo", $selectedColours) ? "checked" : "") . '>Indigo</a><br>';
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="violet"' . (in_array("violet", $selectedColours) ? "checked" : "") . '>Violet</a><br>';
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="white"' . (in_array("white", $selectedColours) ? "checked" : "") . '>White</a><br>';
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="black"' . (in_array("black", $selectedColours) ? "checked" : "") . '>Black</a><br>';
+				?>
 				<input style="margin-top: 10px;" type="submit" name="submit" id="colour" value="Search" />
 			</form>
 		</div>

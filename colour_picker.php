@@ -9,14 +9,16 @@
 	
 	<?php
 		
-		if(strlen($_SERVER['QUERY_STRING']) > 0) {
+		if(strlen($_SERVER['QUERY_STRING']) >= 0) {
 			$colour_querry_arr = array();
+			$selectedColours = array();
 		
 			$arg_array = explode("&", $_SERVER['QUERY_STRING']);
 			foreach ($arg_array as $arg) {
 				$pair = explode("=", $arg);
 				if ($pair[0] == 'colour_name') {
 					$colour_querry_arr[] = "insert into temp_colours values ('" . $pair[1] . "')";
+					$selectedColours[] = $pair[1];
 				}
 			}
 
@@ -39,10 +41,13 @@
 			// select distinct H.plant_id from has_colour H where not exists ((select T.colour_name from temp_colours T) MINUS (select I.colour_name  from has_colour I where I.plant_id = H.plant_id));
 
 			$query = 'with temp as (select distinct H.plant_id from has_colour H where not exists ((select T.colour_name from temp_colours T) MINUS (select I.colour_name from has_colour I where I.plant_id = H.plant_id))) select p.plant_id, p.com_name, p.sci_name, p.cultivar from temp t, plants p where p.plant_id = t.plant_id';
-			//echo($query);
-			$stid = oci_parse($conn, $query);
-			$r = oci_execute($stid);
 		}
+		else {
+			$query = 'select distinct p.plant_id, com_name, sci_name, cultivar from climates cl, soils s, has_colour co, plants p where p.plant_id = co.plant_id and p.climate_id = cl.climate_id and p.soil_id = s.soil_id order by com_name asc';
+		}
+		//echo($query);
+		$stid = oci_parse($conn, $query);
+		$r = oci_execute($stid);
 	?>
 	
 	
@@ -60,15 +65,17 @@
 		<div class="searchColumn">
 			<p class="subhead" style="padding-right: 30px;">What colours do you look for in a plant?</p>			
 			<form action="colour_picker.php">
-				<a><input type="checkbox" name="colour_name" value="red">Red</a><br>
-				<a><input type="checkbox" name="colour_name" value="orange">Orange</a><br>
-				<a><input type="checkbox" name="colour_name" value="yellow">Yellow</a><br>
-				<a><input type="checkbox" name="colour_name" value="green">Green</a><br>
-				<a><input type="checkbox" name="colour_name" value="blue">Blue</a><br>
-				<a><input type="checkbox" name="colour_name" value="indigo">Indigo</a><br>
-				<a><input type="checkbox" name="colour_name" value="violet">Violet</a><br>
-				<a><input type="checkbox" name="colour_name" value="white">White</a><br>
-				<a><input type="checkbox" name="colour_name" value="black">Black</a><br>
+				<?php
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="red"' . (in_array("red", $selectedColours) ? "checked" : "") . '>Red</a><br>';
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="orange"' . (in_array("orange", $selectedColours) ? "checked" : "") . '>Orange</a><br>';
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="yellow"' . (in_array("yellow", $selectedColours) ? "checked" : "") . '>Yellow</a><br>';
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="green"' . (in_array("green", $selectedColours) ? "checked" : "") . '>Green</a><br>';
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="blue"' . (in_array("blue", $selectedColours) ? "checked" : "") . '>Blue</a><br>';
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="indigo"' . (in_array("indigo", $selectedColours) ? "checked" : "") . '>Indigo</a><br>';
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="violet"' . (in_array("violet", $selectedColours) ? "checked" : "") . '>Violet</a><br>';
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="white"' . (in_array("white", $selectedColours) ? "checked" : "") . '>White</a><br>';
+					print '<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="black"' . (in_array("black", $selectedColours) ? "checked" : "") . '>Black</a><br>';
+				?>
 				<input style="margin-top: 10px;" type="submit" name="submit" id="colour" value="Search" />
 			</form>
 		</div>

@@ -30,7 +30,15 @@
 	
 			for ($x = 0; $x < sizeof($attributeKeys); $x++) {
 				if ($_REQUEST[$attributeKeys[$x]] != 'none' && $_REQUEST[$attributeKeys[$x]] != ''  && $_REQUEST[$attributeKeys[$x]] != 'undefined') {
-					$attributeQuery = $attributeQuery . $attributeKeys[$x] . ' = ' . '\'' . $_REQUEST[$attributeKeys[$x]] . '\'' . ' and ';
+					if($attributeKeys[$x] == 'temp_max') {
+						$attributeQuery = $attributeQuery . $attributeKeys[$x] . ' >= ' . $_REQUEST[$attributeKeys[$x]] . ' and ';
+					}
+					else if($attributeKeys[$x] == 'temp_min') {
+						$attributeQuery = $attributeQuery . $attributeKeys[$x] . ' <= ' . $_REQUEST[$attributeKeys[$x]] . ' and ';
+					}
+					else {
+						$attributeQuery = $attributeQuery . $attributeKeys[$x] . ' = ' . '\'' . $_REQUEST[$attributeKeys[$x]] . '\'' . ' and ';
+					}
 				}
 			}
 	
@@ -45,7 +53,7 @@
 		$conn = oci_connect("ora_o1c0b", "a55307145", "ug");
 
 		$query = 'select distinct p.plant_id, com_name, sci_name, cultivar from climates cl, soils s, has_colour co, plants p where p.plant_id = co.plant_id and p.climate_id = cl.climate_id and p.soil_id = s.soil_id' . $query_cond . ' order by com_name asc';
-		//echo($query);
+		echo($query);
 		$stid = oci_parse($conn, $query);
 		$r = oci_execute($stid);
 	?>

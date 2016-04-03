@@ -44,11 +44,11 @@
 		<div class="wrapper" id="nav" style="padding-top:10px;padding-bottom:10px;">
 			<a href="stats.php" style="padding-right:15px;">Stats</a>
 			<a href="colour_picker.php" style="padding-right:15px;">Colour Picker</a>
-			<a href="admin_homepage.php" style="padding-right:15px;">Admin</a>
+			<a href="update.php" style="padding-right:15px;">Update</a>
+			<a href="delete.php" style="padding-right:15px;">Delete</a>
 		</div>
 		<hr>
 		<hr>
-		
 		<div style="padding-bottom: 5px;">
 			<p class="subhead">Hey, Faceplant! How many of which plants are what?</p>	
 			<table id="infoTable" style="width:50%;">

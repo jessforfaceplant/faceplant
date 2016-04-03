@@ -6,56 +6,75 @@
 		<script src="scripts.js"></script>
 	</head>
 	
-	<?php
+	<?php	
 		if($_GET['updatePlant'] == "Update Plant") {
 			$plantKeys = array('com_name','sci_name','cultivar','description', 'edible', 'medicinal', 'petsafe', 'width', 'height');
-			$colours = array('red','orange','yellow','green','blue','indigo','violet','white','black');
 			
 			// Plant query
-			$plantQuery = "set ";
+			$updateQuery = "set ";
 			for ($x = 0; $x < sizeof($plantKeys); $x++) {
 				if ($_REQUEST[$plantKeys[$x]] != 'none' && $_REQUEST[$plantKeys[$x]] != ''  && $_REQUEST[$plantKeys[$x]] != 'undefined') {
-					$plantQuery = $plantQuery . $plantKeys[$x] . ' = \'' . $_REQUEST[$plantKeys[$x]] . '\', ';
+					$updateQuery = $updateQuery . $plantKeys[$x] . ' = \'' . $_REQUEST[$plantKeys[$x]] . '\', ';
 				}
 			}
-
-			if (strlen($plantQuery) > 4) {
-				$plantQuery = substr($plantQuery, 0, strlen($plantQuery) - 2);
+			if (strlen($updateQuery) > 4) {
+				$updateQuery = substr($updateQuery, 0, strlen($updateQuery) - 2);
 			}
 		
-			$plantQuery = 'update plants ' . $plantQuery . ' where plant_id = \'' . $_REQUEST['plant_id'] . '\'';
-		
-			//echo($plantQuery);
-		
+			$updateQuery = 'update plants ' . $updateQuery . ' where plant_id = \'' . $_REQUEST['plant_id'] . '\'';
+					
 			//Create connection to Oracle
 			$conn = oci_connect("ora_o1c0b", "a55307145", "ug");
-
-			//echo $plantQuery;
-			$stid = oci_parse($conn, $plantQuery);
+			$stid = oci_parse($conn, $updateQuery);
 			$success = oci_execute($stid);
+			
+			$plant_id = $_REQUEST['plant_id'];
+			$query = 'select distinct com_name, sci_name, cultivar, description, edible, medicinal, petsafe, height, width, light, growthperiod_start, growthperiod_end, temp_min, temp_max, moisture, n, p, k, humus, clay, ph from climates cl, soils s, has_colour co, plants p where p.plant_id = co.plant_id and p.climate_id = cl.climate_id and p.soil_id = s.soil_id and p.plant_id = \'' . $plant_id . '\'';
+		
+			$stid_refresh = oci_parse($conn, $query);
+			$r = oci_execute($stid_refresh);
+			
+			// Fetch each row in an associative array
+			while ($row = oci_fetch_array($stid_refresh, OCI_RETURN_NULLS+OCI_ASSOC)) {
+				$com_name = ucfirst($row['COM_NAME']);
+				$sci_name = ucfirst($row['SCI_NAME']);
+				$cultivar = ucfirst($row['CULTIVAR']);
+				$description = $row['DESCRIPTION'];
+				$edible = $row['EDIBLE'];
+				($edible == 'Y' ? $edible = 'Yes' : $edible = 'No');
+				$medicinal = $row['MEDICINAL'];
+				($medicinal == 'Y' ? $medicinal = 'Yes' : $medicinal = 'No');
+				$petsafe = $row['PETSAFE'];
+				($petsafe == 'Y' ? $petsafe = 'Yes' : $petsafe = 'No');
+				$height = $row['HEIGHT'];
+				switch ($height) {
+					case 'L':
+						$height = 'Short';
+						break;
+					case 'M':
+						$height = 'Medium';
+						break;
+					case 'H':
+						$height = 'Tall';
+						break;
+				}
+				$width = $row['WIDTH'];
+				switch ($width) {
+					case 'L':
+						$width = 'Narrow';
+						break;
+					case 'M':
+						$width = 'Medium';
+						break;
+					case 'H':
+						$width = 'Wide';
+						break;
+				}
+			}
 		
 		}
- 		
-
-		// Fetch each row in an associative array;
-// 		while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
-// 			$numresults++;
-// 			$plant_id = $row['PLANT_ID'];
-// 			print '<tr>';
-// 			print '<td style="text-align:center"><input type="checkbox" name="favourite" id="favourite" value="' . $plant_id . '"></td>';
-// 			foreach ($row as $item) {
-// 				if ($item != $plant_id) {
-// 					print '<td>'. '<a href="profile.php?id=' . $plant_id . '">' . ($item !== null ? htmlentities(ucfirst($item), ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
-// 				}
-// 			}
-// 		}
-// 		
-
-		
-		
-
 	?>
-
+		
 	<body>
 		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT *~UPDATE~*'" onmouseout="this.innerHTML = 'FACEPLANT ~*UPDATE*~'" onclick="javascript:location.href='homepage.php'">FACEPLANT ~*UPDATE*~</p>
 		<div class="wrapper" id="nav" style="padding-top:10px;padding-bottom:10px;">
@@ -66,7 +85,7 @@
 		</div>
 		<hr><hr>
 		<div id="names">
-			<form id="tupleForm" action="admin_homepage.php">
+			<form id="tupleForm" action="update.php">
 				<p class="subhead">Names/Description</p>
 				<div style="padding-bottom: 10px;">
 					<a style="padding-right: 10px;">Plant ID:</a>
@@ -145,11 +164,37 @@
 				<div style="padding-top: 10px;">
 					<input type="submit" name="updatePlant" id="updatePlant" value="Update Plant" />
 				</div>
-			</form>		
+			</form>	
+		</div>
+		<div id="info">
+			<table id="infoTable" style="margin-top: 30px; width:100%;">
+				<?php 
+					print '<tr><td id="rowHeader">Plant ID</td>';
+					print '<td>'. $plant_id . '</td></tr>';
+					print '<tr><td id="rowHeader">Scientific Name</td>';
+					print '<td>'. $sci_name . '</td></tr>';
+					print '<tr><td id="rowHeader">Common Name</td>';
+					print '<td>'. $com_name . '</td></tr>';
+					print '<tr><td id="rowHeader">Cultivar</td>';
+					print '<td>' . $cultivar . '</td></tr>';
+					print '<tr><td id="rowHeader">Description</td>';
+					print '<td>' . $description . '</td></tr>';
+					print '<tr><td id="rowHeader">Edible</td>';
+					print '<td>'. $edible . '</td></tr>';
+					print '<tr><td id="rowHeader">Medicinal</td>';
+					print '<td>'. $medicinal . '</td></tr>';
+					print '<tr><td id="rowHeader">Petsafe</td>';
+					print '<td>' . $petsafe . '</td></tr>';
+					print '<tr><td id="rowHeader">Height</td>';
+					print '<td>' . $height . '</td></tr>';
+					print '<tr><td id="rowHeader">Width</td>';
+					print '<td>' . $width . '</td></tr>';
+				?>
+			</table>
 		</div>
 		<div id="info" style="padding-top:50px;">
 			<?php
-			if ($_GET['submit'] == "Update Plant") {
+			if ($_GET['updatePlant'] == "Update Plant") {
 				echo($success ? "Update successful" : "Your update failed a constraint");
 			}
 			?>

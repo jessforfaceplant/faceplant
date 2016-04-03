@@ -306,17 +306,17 @@
 					?>
 				</div>
 			
-				<div style="padding-bottom: 5px;">
-				<a style="padding-right: 10px;">Light</a>
-					<select name="light" id="light">
-						<?php
-							$selected_light = $_GET['k'];
-							print '<option value="none" selected></option>';
-							print '<option value="L"' . ($selected_light == "L" ? 'selected' : '') . '>Low</option>';
-							print '<option value="M"' . ($selected_light == "M" ? 'selected' : '') . '>Medium</option>';
-							print '<option value="H"' . ($selected_light == "H" ? 'selected' : '') . '>High</option>';
-						?>
-					</select>
+				<div style="padding-bottom: 15px;">
+					<a style="padding-right: 10px;">Light</a>
+						<select name="light" id="light">
+							<?php
+								$selected_light = $_GET['k'];
+								print '<option value="none" selected></option>';
+								print '<option value="L"' . ($selected_light == "L" ? 'selected' : '') . '>Low</option>';
+								print '<option value="M"' . ($selected_light == "M" ? 'selected' : '') . '>Medium</option>';
+								print '<option value="H"' . ($selected_light == "H" ? 'selected' : '') . '>High</option>';
+							?>
+						</select>
 				</div>
 				<input type="submit" name="submit" id="attbutt" value="Submit" />
 			</form>		

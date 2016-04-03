@@ -9,7 +9,7 @@
 	
 	<?php
 		
-		if(strlen($_SERVER['QUERY_STRING']) > 0) {
+		if(strlen($_SERVER['QUERY_STRING']) >= 0) {
 			$colour_querry_arr = array();
 		
 			$arg_array = explode("&", $_SERVER['QUERY_STRING']);
@@ -39,30 +39,38 @@
 			// select distinct H.plant_id from has_colour H where not exists ((select T.colour_name from temp_colours T) MINUS (select I.colour_name  from has_colour I where I.plant_id = H.plant_id));
 
 			$query = 'with temp as (select distinct H.plant_id from has_colour H where not exists ((select T.colour_name from temp_colours T) MINUS (select I.colour_name from has_colour I where I.plant_id = H.plant_id))) select p.plant_id, p.com_name, p.sci_name, p.cultivar from temp t, plants p where p.plant_id = t.plant_id';
-			//echo($query);
-			$stid = oci_parse($conn, $query);
-			$r = oci_execute($stid);
 		}
+		else {
+			$query = 'select distinct p.plant_id, com_name, sci_name, cultivar from climates cl, soils s, has_colour co, plants p where p.plant_id = co.plant_id and p.climate_id = cl.climate_id and p.soil_id = s.soil_id order by com_name asc';
+		}
+		//echo($query);
+		$stid = oci_parse($conn, $query);
+		$r = oci_execute($stid);
 	?>
 	
 	
 	<body>
 		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT *~COLOUR~*'" onmouseout="this.innerHTML = 'FACEPLANT ~*COLOUR*~'" onclick="javascript:location.href='homepage.php'">FACEPLANT ~*COLOUR*~</p>
+		<div class="wrapper" id="nav" style="padding-top:10px;padding-bottom:10px;">
+			<a href="stats.php" style="padding-right:15px;">Stats</a>
+			<a href="colour_picker.php" style="padding-right:15px;">Colour Picker</a>
+			<a href="admin_homepage.php" style="padding-right:15px;">Admin</a>
+		</div>
 		<hr>
 		<hr>
 		
 		<div class="searchColumn">
 			<p class="subhead" style="padding-right: 30px;">What colours do you look for in a plant?</p>			
 			<form action="colour_picker.php">
-				<a style="padding-bottom=3px;"><input type="checkbox" name="colour_name" value="red">Red</a><br>
-				<a><input type="checkbox" name="colour_name" value="orange">Orange</a><br>
-				<a><input type="checkbox" name="colour_name" value="yellow">Yellow</a><br>
-				<a><input type="checkbox" name="colour_name" value="green">Green</a><br>
-				<a><input type="checkbox" name="colour_name" value="blue">Blue</a><br>
-				<a><input type="checkbox" name="colour_name" value="indigo">Indigo</a><br>
-				<a><input type="checkbox" name="colour_name" value="violet">Violet</a><br>
-				<a><input type="checkbox" name="colour_name" value="white">White</a><br>
-				<a><input type="checkbox" name="colour_name" value="black">Black</a><br>
+				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="red">Red</a><br>
+				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="orange">Orange</a><br>
+				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="yellow">Yellow</a><br>
+				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="green">Green</a><br>
+				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="blue">Blue</a><br>
+				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="indigo">Indigo</a><br>
+				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="violet">Violet</a><br>
+				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="white">White</a><br>
+				<a><input style="margin-right:10px;" type="checkbox" name="colour_name" value="black">Black</a><br>
 				<input style="margin-top: 10px;" type="submit" name="submit" id="colour" value="Search" />
 			</form>
 		</div>
@@ -72,10 +80,10 @@
 			// Fetch each row in an associative array
 			print '<form action="favourite.php" method="get">';
 			print '<table>';
-			print '<td style="background-color: #d9d9d9;"></td>';
+			print '<tr><td style="background-color: #d9d9d9;"></td>';
 			print '<td style="background-color: #d9d9d9;">Common Name</td>';
 			print '<td style="background-color: #d9d9d9;">Scientific Name</td>';
-			print '<td style="background-color: #d9d9d9;">Cultivar</td>';
+			print '<td style="background-color: #d9d9d9;">Cultivar</td></tr>';
 			while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
 				$numresults++;
 				$plant_id = $row['PLANT_ID'];

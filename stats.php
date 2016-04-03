@@ -8,18 +8,32 @@
 	
 	
 	<?php
-
-		$colour = $_GET['colour_name'];
 		
-		$query = 'select distinct p.plant_id, com_name, sci_name, cultivar from has_colour co, plants p where p.plant_id = co.plant_id ' . $query_cond . ' order by com_name asc';
-		
+		$queryMed = "select count(*) from plants where medicinal = 'Y' group by medicinal";
+		$queryEd = "select count(*) from plants where edible = 'Y' group by edible";
+		$queryPet = "select count(*) from plants where petsafe = 'Y' group by petsafe";
+		$queryPop = "with temp as (select plant_id, count(*) as total from favourites group by plant_id) select temp.plant_id, temp.total from temp where temp.total = (select max(temp.total) from temp)";
+		$queryNop = "with temp as (select plant_id, count(*) as total from favourites group by plant_id) select temp.plant_id, temp.total from temp where temp.total = (select max(temp.total) from temp)";
 		// Create connection to Oracle
 		$conn = oci_connect("ora_o1c0b", "a55307145", "ug");
 
-		$query = 'select distinct p.plant_id, com_name, sci_name, cultivar from climates cl, soils s, has_colour co, plants p where p.plant_id = co.plant_id and p.climate_id = cl.climate_id and p.soil_id = s.soil_id' . $query_cond . ' order by com_name asc';
-		//echo($query);
-		$stid = oci_parse($conn, $query);
+		$stid = oci_parse($conn, $queryMed);
 		$r = oci_execute($stid);
+		while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
+			$med_count = $row['COUNT(*)'];
+		}
+		
+		$stid = oci_parse($conn, $queryEd);
+		$r = oci_execute($stid);
+		while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
+			$ed_count = $row['COUNT(*)'];
+		}
+		
+		$stid = oci_parse($conn, $queryPet);
+		$r = oci_execute($stid);
+		while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
+			$pet_count = $row['COUNT(*)'];
+		}
 	?>
 	
 	
@@ -29,16 +43,25 @@
 		<hr>
 		
 		<div style="padding-bottom: 5px;">
-			<a style="padding-right: 10px;">Colour</a>
-			<select name="colour_name" id="colour_name">
-				<?php
-					$selected_colour = $_GET['colour_name'];
-					print '<option value="none" selected></option>';
-					print '<option value="blue"' . ($selected_colour == "blue" ? 'selected' : '') . '>Blue</option>';
-					print '<option value="red"' . ($selected_colour == "red" ? 'selected' : '') . '>Red</option>';
-					print '<option value="yellow"' . ($selected_colour == "yellow" ? 'selected' : '') . '>Yellow</option>';
+			<p class="subhead">Hey, Faceplant! How many of which plants are what?</p>	
+			<table id="infoTable" style="width:50%;">
+				<?php 
+					print '<tr><td id="rowHeader">Medicinal</td>';
+					print '<td>'. $med_count . '</td></tr>';
+					print '<tr><td id="rowHeader">Edible</td>';
+					print '<td>' . $ed_count . '</td></tr>';
+					print '<tr><td id="rowHeader">Petsafe</td>';
+					print '<td>' . $pet_count . '</td></tr>';
 				?>
-			</select>
+			</table>
+			<p class="subhead">Most popular</p>
+			<?php
+				print '<a>' . $most_pop . '</a>';
+			?>
+			<p class="subhead">Least popular</p>
+			<?php
+				print '<a>' . $least_pop . '</a>';
+			?>
 		</div>
 		
 		

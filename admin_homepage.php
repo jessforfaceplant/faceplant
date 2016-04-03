@@ -7,7 +7,7 @@
 	</head>
 	
 	<?php
-		if($_GET['submit'] == "Update Plant") {
+		if($_GET['updatePlant'] == "Update Plant") {
 			$plantKeys = array('com_name','sci_name','cultivar','description', 'edible', 'medicinal', 'petsafe', 'width', 'height');
 			$colours = array('red','orange','yellow','green','blue','indigo','violet','white','black');
 			
@@ -34,19 +34,19 @@
 			$stid = oci_parse($conn, $plantQuery);
 			$success = oci_execute($stid);
 		
-			//echo("<br> this is success:" . $success);
 		}
-		if($_GET['submit'] == "Delete Plant") {
+		if($_GET['deletePlant'] == "Delete Plant") {
 			
 			$deleteQuery = 'delete from plants where plant_id = ' . $_REQUEST['plant_id'];
 		
 			echo($deleteQuery);
 		
-			// //Create connection to Oracle
+			//Create connection to Oracle
 			$conn = oci_connect("ora_o1c0b", "a55307145", "ug");
 
-			$stid = oci_parse($conn, $deleteQuery);
-			$success = oci_execute($stid);
+			$stid = oci_parse($conn, "commit");
+			$success = oci_execute($stid, OCI_COMMIT_ON_SUCCESS);
+			oci_close($conn);
 		}
  		
 
@@ -150,7 +150,7 @@
 					</select>
 				</div>
 				<div style="padding-top: 10px;">
-					<input type="submit" name="submit" id="updatePlant" value="Update Plant" />
+					<input type="submit" name="updatePlant" id="updatePlant" value="Update Plant" />
 				</div>
 			</form>		
 		    <form id="deleteForm" action="admin_homepage.php">
@@ -160,7 +160,7 @@
 					<input type="text" name="plant_id" id="plant_id">
 				</div>
 				<div style="padding-top: 10px;">
-					<input type="submit" name="submit" id="deleteplant" value="Delete Plant" />
+					<input type="submit" name="deletePlant" id="deletePlant" value="Delete Plant" />
 				</div>
 			</form>
 		</div>

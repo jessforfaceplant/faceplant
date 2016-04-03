@@ -53,7 +53,7 @@
 		$conn = oci_connect("ora_o1c0b", "a55307145", "ug");
 
 		$query = 'select distinct p.plant_id, com_name, sci_name, cultivar from climates cl, soils s, has_colour co, plants p where p.plant_id = co.plant_id and p.climate_id = cl.climate_id and p.soil_id = s.soil_id' . $query_cond . ' order by com_name asc';
-		echo($query);
+		//echo($query);
 		$stid = oci_parse($conn, $query);
 		$r = oci_execute($stid);
 	?>
@@ -66,7 +66,7 @@
 				<?php
 					$searched_name = $_GET['plantname'];
 					print '<input type="text" name="plantname" id="plantname" placeholder="Name or cultivar" value="' . $searched_name . '">';
-					print '&nbsp;<input type="submit" name="submit" id="searchbutt" value="Search" />';
+					print '&nbsp;<input style="margin-top: 10px;" type="submit" name="submit" id="searchbutt" value="Search" />';
 				?>
 			</form>
 			<form id="attributeForm" action="">
@@ -315,7 +315,11 @@
 			$numresults = 0;
 			// Fetch each row in an associative array
 			print '<form action="favourite.php" method="get">';
-			print '<table border="1">';
+			print '<table>';
+			print '<tr><td style="background-color: #d9d9d9;"></td>';
+			print '<td style="background-color: #d9d9d9;">Common Name</td>';
+			print '<td style="background-color: #d9d9d9;">Scientific Name</td>';
+			print '<td style="background-color: #d9d9d9;">Cultivar</td></tr>';
 			while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
 				$numresults++;
 				$plant_id = $row['PLANT_ID'];
@@ -329,7 +333,7 @@
 				print '</tr>';
 			}
 			print '</table>';
-			print '<input type="submit" value="Add to favourites">';
+			print '<input style="margin-top: 10px;" type="submit" value="Add to favourites">';
 			print '</form>';
 	
 			if ($numresults == 0) {

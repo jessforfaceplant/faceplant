@@ -37,8 +37,7 @@
 		}
 		
 	?>
-	
-	
+
 	<body>
 		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT *~STATS~*'" onmouseout="this.innerHTML = 'FACEPLANT ~*STATS*~'" onclick="javascript:location.href='homepage.php'">FACEPLANT ~*STATS*~</p>
 		<div class="wrapper" id="nav" style="padding-top:10px;padding-bottom:10px;">
@@ -50,6 +49,7 @@
 		<hr>
 		<hr>
 		<div style="padding-bottom: 5px;">
+
 			<p class="subhead">Hey, Faceplant! How many of which plants are what?</p>	
 			<table id="infoTable" style="width:50%;">
 				<?php 
@@ -62,86 +62,92 @@
 				?>
 			</table>
 			<div style="padding-top: 30px;">
-				<p class="subhead">Sup Faceplant?! What plants are the most and least popular?</p>	
-				<p class="subhead">Most Popular:</p>
+				<p class="subhead">Sup Faceplant?! What plants are the most and least popular? Click to find out!</p>	
 				<?php
-					$stid = oci_parse($conn, $queryPop);
-					$r = oci_execute($stid);
-					$numresults = 0;
-					// Fetch each row in an associative array
-					print '<form action="stats.php" method="get">';
-					print '<table>';
-					print '<td style="background-color: #d9d9d9;">Total</td>';
-					print '<td style="background-color: #d9d9d9;">Scientific Name</td>';
-					print '<td style="background-color: #d9d9d9;">Common Name</td>';
-					print '<td style="background-color: #d9d9d9;">Cultivar</td>';
-					while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
-						$numresults++;
-						$plant_id = $row['PLANT_ID'];
-						print '<tr>';
-						foreach ($row as $item) {
-							if ($item != $plant_id) 
-							{
-								print '<td>'. '<a href="profile.php?id=' . $plant_id . '">' . ($item !== null ? htmlentities(ucfirst($item), ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
-							}
+					if($_GET['popular'] == "Most Popular") {
+						$stid = oci_parse($conn, $queryPop);
+						$r = oci_execute($stid);
+						$numresults = 0;
+						// Fetch each row in an associative array
+						print '<form action="stats.php" method="get">';
+						print '<table>';
+						print '<td style="background-color: #d9d9d9;">Total</td>';
+						print '<td style="background-color: #d9d9d9;">Scientific Name</td>';
+						print '<td style="background-color: #d9d9d9;">Common Name</td>';
+						print '<td style="background-color: #d9d9d9;">Cultivar</td>';
+						while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
+							$numresults++;
+							$plant_id = $row['PLANT_ID'];
+							print '<tr>';
+							foreach ($row as $item) {
+								if ($item != $plant_id) 
+								{
+									print '<td>'. '<a href="profile.php?id=' . $plant_id . '">' . ($item !== null ? htmlentities(ucfirst($item), ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
+								}
 							
+							}
+							print '</tr>';
 						}
-						print '</tr>';
-					}
-					print '</table>';
-				    //print '<input type="submit" style="margin-top: 10px;" value="Add to favourites">';
-					print '</form>';
+						print '</table>';
+						//print '<input type="submit" style="margin-top: 10px;" value="Add to favourites">';
+						print '</form>';
 	
-					if ($numresults == 0) {
-						print '<p style="text-align:center; margin-top: 0px;">No plants match your query :(</p>';
-					}
-					elseif ($numresults == 1) {
-						print '<p style="text-align:center; margin-top: 0px;">' . $numresults . ' plant</p>';
-					}
-					else {
-						print '<p style="text-align:center; margin-top: 0px;">' . $numresults . ' plants</p>';
+						if ($numresults == 0) {
+							print '<p style="text-align:center; margin-top: 0px;">No plants match your query :(</p>';
+						}
+						elseif ($numresults == 1) {
+							print '<p style="text-align:center; margin-top: 0px;">' . $numresults . ' plant</p>';
+						}
+						else {
+							print '<p style="text-align:center; margin-top: 0px;">' . $numresults . ' plants</p>';
+						}
 					}
 				?>
 			</div>
 			<div>
-				<p class="subhead">Least Popular:</p>
+			
 				<?php
-					$stid = oci_parse($conn, $queryNop);
-					$r = oci_execute($stid);
-					$numresults = 0;
-					// Fetch each row in an associative array
-					print '<form action="stats.php" method="get">';
-					print '<table>';
-					print '<td style="background-color: #d9d9d9;">Total</td>';
-					print '<td style="background-color: #d9d9d9;">Scientific Name</td>';
-					print '<td style="background-color: #d9d9d9;">Common Name</td>';
-					print '<td style="background-color: #d9d9d9;">Cultivar</td>';
-					while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
-						$numresults++;
-						$plant_id = $row['PLANT_ID'];
-						print '<tr>';
-						foreach ($row as $item) {
-							if ($item != $plant_id) 
-							{
-								print '<td>'. '<a href="profile.php?id=' . $plant_id . '">' . ($item !== null ? htmlentities(ucfirst($item), ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
+				    if($_GET['popular'] == "Least Popular") {
+						$stid = oci_parse($conn, $queryNop);
+						$r = oci_execute($stid);
+						$numresults = 0;
+						// Fetch each row in an associative array
+						print '<form action="stats.php" method="get">';
+						print '<table>';
+						print '<td style="background-color: #d9d9d9;">Total</td>';
+						print '<td style="background-color: #d9d9d9;">Scientific Name</td>';
+						print '<td style="background-color: #d9d9d9;">Common Name</td>';
+						print '<td style="background-color: #d9d9d9;">Cultivar</td>';
+						while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
+							$numresults++;
+							$plant_id = $row['PLANT_ID'];
+							print '<tr>';
+							foreach ($row as $item) {
+								if ($item != $plant_id) 
+								{
+									print '<td>'. '<a href="profile.php?id=' . $plant_id . '">' . ($item !== null ? htmlentities(ucfirst($item), ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
+								}
 							}
+							print '</tr>';
 						}
-						print '</tr>';
-					}
-					print '</table>';
-				    //print '<input type="submit" style="margin-top: 10px;" value="Add to favourites">';
-					print '</form>';
+						print '</table>';
+						print '</form>';
 	
-					if ($numresults == 0) {
-						print '<p style="text-align:center; margin-top: 0px;">No plants match your query :(</p>';
-					}
-					elseif ($numresults == 1) {
-						print '<p style="text-align:center; margin-top: 0px;">' . $numresults . ' plant</p>';
-					}
-					else {
-						print '<p style="text-align:center; margin-top: 0px;">' . $numresults . ' plants</p>';
+						if ($numresults == 0) {
+							print '<p style="text-align:center; margin-top: 0px;">No plants match your query :(</p>';
+						}
+						elseif ($numresults == 1) {
+							print '<p style="text-align:center; margin-top: 0px;">' . $numresults . ' plant</p>';
+						}
+						else {
+							print '<p style="text-align:center; margin-top: 0px;">' . $numresults . ' plants</p>';
+						}
 					}
 				?>
+				<form action="stats.php">
+					<input style="margin-right: 10px;" type="submit" name="popular" style="margin-top: 10px;" value="Most Popular">
+					<input type="submit" name="popular" style="margin-top: 10px;" value="Least Popular">
+				</form>
 			</div>
 		</div>
 		

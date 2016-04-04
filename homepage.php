@@ -190,7 +190,7 @@
 				<a style="padding-right: 10px;">Humus</a>
 					<select name="humus" id="humus">
 						<?php
-							$selected_humus = $_GET['width'];
+							$selected_humus = $_GET['humus'];
 							print '<option value="none" selected></option>';
 							print '<option value="L"' . ($selected_humus == "L" ? 'selected' : '') . '>Low</option>';
 							print '<option value="M"' . ($selected_humus == "M" ? 'selected' : '') . '>Medium</option>';

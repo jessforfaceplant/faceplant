@@ -4,6 +4,17 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<link href='https://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="style.css" />
+		<script>
+			function hover() {
+				var image = document.getElementById('logoimg');
+				image.src = "logosmallhover.png";
+			}
+		
+			function unhover() {
+				var image = document.getElementById('logoimg');
+				image.src = "logosmall.png";
+			}
+		</script>
 	</head>
 	
 	
@@ -37,9 +48,6 @@
 				$r = oci_execute($stid, OCI_COMMIT_ON_SUCCESS);
 			}
 			
-			
-			// select distinct H.plant_id from has_colour H where not exists ((select T.colour_name from temp_colours T) MINUS (select I.colour_name  from has_colour I where I.plant_id = H.plant_id));
-
 			$query = 'with temp as (select distinct H.plant_id from has_colour H where not exists ((select T.colour_name from temp_colours T) MINUS (select I.colour_name from has_colour I where I.plant_id = H.plant_id))) select p.plant_id, p.com_name, p.sci_name, p.cultivar from temp t, plants p where p.plant_id = t.plant_id';
 		}
 		else {
@@ -52,7 +60,10 @@
 	
 	
 	<body>
-		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT *~COLOUR~*'" onmouseout="this.innerHTML = 'FACEPLANT ~*COLOUR*~'" onclick="javascript:location.href='homepage.php'">FACEPLANT ~*COLOUR*~</p>
+		<div style="padding-top:20px;">
+			<a class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT *~COLOUR~*'" onmouseout="this.innerHTML = 'FACEPLANT ~*COLOUR*~'" onclick="javascript:location.href='homepage.php'">FACEPLANT ~*COLOUR*~</a>
+			<a style="float:right;"><img id="logoimg" src="logosmall.png" width="80" onmouseover="hover()" onmouseout="unhover()" onclick="javascript:location.href='logopage.html'"></a>
+		</div>
 		<div class="wrapper" id="nav" style="padding-top:10px;padding-bottom:10px;">
 			<a href="stats.php" style="padding-right:15px;">Stats</a>
 			<a href="colour_picker.php" style="padding-right:15px;">Colour Picker</a>
@@ -118,8 +129,5 @@
 			}
 		?>
 		</div>
-		
-		
-		
 	</body>
 </html>

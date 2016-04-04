@@ -1,5 +1,19 @@
 <html>
-	<div style="text-align: center;">
-		<img src="logo.png" width="600" />
+<head>
+	<script>
+		function wink() {
+			var image = document.getElementById('logoimg');
+			image.src = "logowink.png";
+		}
+		
+		function smile() {
+			var image = document.getElementById('logoimg');
+			image.src = "logosmile.png";
+		}
+	</script>
+</head>
+
+	<div style="text-align: center; padding-top:50px;">
+		<img id="logoimg" src="logosmile.png" width="600" onmouseover="wink()" onmouseout="smile()" onclick="javascript:location.href='homepage.php'"/>
 	</div>
 </html>

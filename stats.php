@@ -4,6 +4,17 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<link href='https://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="style.css" />
+		<script>
+			function hover() {
+				var image = document.getElementById('logoimg');
+				image.src = "logosmallhover.png";
+			}
+		
+			function unhover() {
+				var image = document.getElementById('logoimg');
+				image.src = "logosmall.png";
+			}
+		</script>	
 	</head>
 	
 	
@@ -39,7 +50,10 @@
 	?>
 
 	<body>
-		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT *~STATS~*'" onmouseout="this.innerHTML = 'FACEPLANT ~*STATS*~'" onclick="javascript:location.href='homepage.php'">FACEPLANT ~*STATS*~</p>
+		<div style="padding-top:20px;">
+			<a class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT *~STATS~*'" onmouseout="this.innerHTML = 'FACEPLANT ~*STATS*~'" onclick="javascript:location.href='homepage.php'">FACEPLANT ~*STATS*~</a>
+			<a style="float:right;"><img id="logoimg" src="logosmall.png" width="80" onmouseover="hover()" onmouseout="unhover()" onclick="javascript:location.href='logopage.html'"></a>
+		</div>
 		<div class="wrapper" id="nav" style="padding-top:10px;padding-bottom:10px;">
 			<a href="stats.php" style="padding-right:15px;">Stats</a>
 			<a href="colour_picker.php" style="padding-right:15px;">Colour Picker</a>

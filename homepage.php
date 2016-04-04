@@ -30,7 +30,15 @@
 	
 			for ($x = 0; $x < sizeof($attributeKeys); $x++) {
 				if ($_REQUEST[$attributeKeys[$x]] != 'none' && $_REQUEST[$attributeKeys[$x]] != ''  && $_REQUEST[$attributeKeys[$x]] != 'undefined') {
-					$attributeQuery = $attributeQuery . $attributeKeys[$x] . ' = ' . '\'' . $_REQUEST[$attributeKeys[$x]] . '\'' . ' and ';
+					if($attributeKeys[$x] == 'temp_max') {
+						$attributeQuery = $attributeQuery . $attributeKeys[$x] . ' >= ' . $_REQUEST[$attributeKeys[$x]] . ' and ';
+					}
+					else if($attributeKeys[$x] == 'temp_min') {
+						$attributeQuery = $attributeQuery . $attributeKeys[$x] . ' <= ' . $_REQUEST[$attributeKeys[$x]] . ' and ';
+					}
+					else {
+						$attributeQuery = $attributeQuery . $attributeKeys[$x] . ' = ' . '\'' . $_REQUEST[$attributeKeys[$x]] . '\'' . ' and ';
+					}
 				}
 			}
 	
@@ -52,13 +60,19 @@
 
 	<body>
 		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT ;D'" onmouseout="this.innerHTML = 'FACEPLANT :D'" onclick="javascript:location.href='homepage.php'">FACEPLANT :D</p>
+		<div class="wrapper" id="nav" style="padding-top:10px;padding-bottom:10px;">
+			<a href="stats.php" style="padding-right:15px;">Stats</a>
+			<a href="colour_picker.php" style="padding-right:15px;">Colour Picker</a>
+			<a href="update.php" style="padding-right:15px;">Update</a>
+			<a href="delete.php" style="padding-right:15px;">Delete</a>
+		</div>
 		<hr><hr>
 		<div class="searchColumn">
 			<form id="searchForm" action="homepage.php">
 				<?php
 					$searched_name = $_GET['plantname'];
 					print '<input type="text" name="plantname" id="plantname" placeholder="Name or cultivar" value="' . $searched_name . '">';
-					print '&nbsp;<input type="submit" name="submit" id="searchbutt" value="Search" />';
+					print '&nbsp;<input style="margin-top: 10px;" type="submit" name="submit" id="searchbutt" value="Search" />';
 				?>
 			</form>
 			<form id="attributeForm" action="">
@@ -69,9 +83,15 @@
 						<?php
 							$selected_colour = $_GET['colour_name'];
 							print '<option value="none" selected></option>';
-							print '<option value="blue"' . ($selected_colour == "blue" ? 'selected' : '') . '>Blue</option>';
 							print '<option value="red"' . ($selected_colour == "red" ? 'selected' : '') . '>Red</option>';
+							print '<option value="orange"' . ($selected_colour == "orange" ? 'selected' : '') . '>Orange</option>';
 							print '<option value="yellow"' . ($selected_colour == "yellow" ? 'selected' : '') . '>Yellow</option>';
+							print '<option value="green"' . ($selected_colour == "green" ? 'selected' : '') . '>Green</option>';
+							print '<option value="blue"' . ($selected_colour == "blue" ? 'selected' : '') . '>Blue</option>';
+							print '<option value="indigo"' . ($selected_colour == "indigo" ? 'selected' : '') . '>Indigo</option>';
+							print '<option value="violet"' . ($selected_colour == "violet" ? 'selected' : '') . '>Violet</option>';
+							print '<option value="white"' . ($selected_colour == "red" ? 'selected' : '') . '>White</option>';
+							print '<option value="black"' . ($selected_colour == "black" ? 'selected' : '') . '>Black</option>';
 						?>
 					</select>
 				</div>
@@ -286,18 +306,17 @@
 						print '<input type="text" name="temp_max" id="temp_max" size="5" placeholder="Max" value="' . $selected_temp_max . '">';
 					?>
 				</div>
-			
-				<div style="padding-bottom: 5px;">
-				<a style="padding-right: 10px;">Light</a>
-					<select name="light" id="light">
-						<?php
-							$selected_light = $_GET['k'];
-							print '<option value="none" selected></option>';
-							print '<option value="L"' . ($selected_light == "L" ? 'selected' : '') . '>Low</option>';
-							print '<option value="M"' . ($selected_light == "M" ? 'selected' : '') . '>Medium</option>';
-							print '<option value="H"' . ($selected_light == "H" ? 'selected' : '') . '>High</option>';
-						?>
-					</select>
+				<div style="padding-bottom: 15px;">
+					<a style="padding-right: 10px;">Light</a>
+						<select name="light" id="light">
+							<?php
+								$selected_light = $_GET['k'];
+								print '<option value="none" selected></option>';
+								print '<option value="L"' . ($selected_light == "L" ? 'selected' : '') . '>Low</option>';
+								print '<option value="M"' . ($selected_light == "M" ? 'selected' : '') . '>Medium</option>';
+								print '<option value="H"' . ($selected_light == "H" ? 'selected' : '') . '>High</option>';
+							?>
+						</select>
 				</div>
 				<input type="submit" name="submit" id="attbutt" value="Submit" />
 			</form>		
@@ -306,32 +325,42 @@
 		<?php
 			$numresults = 0;
 			// Fetch each row in an associative array
-			print '<form action="favourite.php" method="get">';
-			print '<table border="1">';
-			while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
-				$numresults++;
-				$plant_id = $row['PLANT_ID'];
-				print '<tr>';
-				print '<td style="text-align:center"><input type="checkbox" name="favourite" id="favourite" value="' . $plant_id . '"></td>';
-				foreach ($row as $item) {
-					if ($item != $plant_id) {
-						print '<td>'. '<a href="profile.php?id=' . $plant_id . '">' . ($item !== null ? htmlentities(ucfirst($item), ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
+			if ($r == 1) {
+				print '<form action="favourite.php" method="get">';
+				print '<table>';
+				print '<tr><td style="background-color: #d9d9d9;"></td>';
+				print '<td style="background-color: #d9d9d9;">Common Name</td>';
+				print '<td style="background-color: #d9d9d9;">Scientific Name</td>';
+				print '<td style="background-color: #d9d9d9;">Cultivar</td></tr>';
+				while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
+					$numresults++;
+					$plant_id = $row['PLANT_ID'];
+					print '<tr>';
+					print '<td style="text-align:center"><input type="checkbox" name="favourite" id="favourite" value="' . $plant_id . '"></td>';
+					foreach ($row as $item) {
+						if ($item != $plant_id) {
+							print '<td>'. '<a href="profile.php?id=' . $plant_id . '">' . ($item !== null ? htmlentities(ucfirst($item), ENT_QUOTES) : '&nbsp'). '</a>' . '</td>';
+						}
 					}
+					print '</tr>';
 				}
-				print '</tr>';
-			}
-			print '</table>';
-			print '<input type="submit" value="Add to favourites">';
-			print '</form>';
+				print '</table>';
+				if ($numresults != 0) {
+					print '<input style="margin-top: 10px;" type="submit" value="Add to favourites">';
+				}
+				print '</form>';
 	
-			if ($numresults == 0) {
-				print '<p style="text-align:center;">No plants match your query :(</p>';
-			}
-			elseif ($numresults == 1) {
-				print '<p style="text-align:center;">' . $numresults . ' plant</p>';
-			}
-			else {
-				print '<p style="text-align:center;">' . $numresults . ' plants</p>';
+				if ($numresults == 0) {
+					print '<p style="text-align:center;">No plants match your query :(</p>';
+				}
+				else if ($numresults == 1) {
+					print '<p style="text-align:center;">' . $numresults . ' plant</p>';
+				}
+				else {
+					print '<p style="text-align:center;">' . $numresults . ' plants</p>';
+				}
+			} else {
+				print '<p style="text-align:center;">There was an error with your query :(</p>';
 			}
 		?>
 		</div>

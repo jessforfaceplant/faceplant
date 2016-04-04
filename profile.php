@@ -175,12 +175,18 @@
 	
 	<body>
 		<p class="wrapper" id="logo" onmouseover="this.innerHTML = 'FACEPLANT ;D'" onmouseout="this.innerHTML = 'FACEPLANT :D'" onclick="javascript:location.href='homepage.php'">FACEPLANT :D</p>
+		<div class="wrapper" id="nav" style="padding-top:10px;padding-bottom:10px;">
+			<a href="stats.php" style="padding-right:15px;">Stats</a>
+			<a href="colour_picker.php" style="padding-right:15px;">Colour Picker</a>
+			<a href="update.php" style="padding-right:15px;">Update</a>
+			<a href="delete.php" style="padding-right:15px;">Delete</a>
+		</div>
 		<hr><hr>
 		<div id="names">
 			<?php
 				print '<table><tr>';
 				foreach ($colour_array as $colour) {
-					print '<td id="colour" style="background-color:' . $colour . ';">&nbsp</td>';
+					print '<td id="profilecolour" style="background-color:' . $colour . ';">&nbsp</td>';
 				}
 				print '</tr></table>';
 				print '<h1 id="com_name">' . $com_name . '</h1>';

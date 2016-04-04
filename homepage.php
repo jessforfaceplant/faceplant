@@ -324,7 +324,7 @@
 					<a style="padding-right: 10px;">Light</a>
 						<select name="light" id="light">
 							<?php
-								$selected_light = $_GET['k'];
+								$selected_light = $_GET['light'];
 								print '<option value="none" selected></option>';
 								print '<option value="L"' . ($selected_light == "L" ? 'selected' : '') . '>Low</option>';
 								print '<option value="M"' . ($selected_light == "M" ? 'selected' : '') . '>Medium</option>';

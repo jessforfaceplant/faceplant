@@ -306,7 +306,6 @@
 						print '<input type="text" name="temp_max" id="temp_max" size="5" placeholder="Max" value="' . $selected_temp_max . '">';
 					?>
 				</div>
-			
 				<div style="padding-bottom: 15px;">
 					<a style="padding-right: 10px;">Light</a>
 						<select name="light" id="light">

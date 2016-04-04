@@ -65,7 +65,9 @@
 				<p class="subhead">Plant</p>
 				<div style="padding-bottom: 10px;">
 					<a style="padding-right: 10px;">Plant ID:</a>
-					<input type="text" name="plant_id" id="plant_id">
+					<?php
+						print '<input type="text" name="plant_id" id="plant_id"' . ($_GET['plant_id'] ? "value=" . $_GET['plant_id'] : "") . '>';
+					?>
 				</div>
 				<div style="padding-top: 10px;">
 					<input type="submit" name="deletePlant" id="deletePlant" value="Delete Plant" />
@@ -75,7 +77,9 @@
 				<p class="subhead">Soil</p>
 				<div style="padding-bottom: 10px;">
 					<a style="padding-right: 10px;">Soil ID:</a>
-					<input type="text" name="soil_id" id="soil_id">
+					<?php
+						print '<input type="text" name="soil_id" id="soil_id"' . ($_GET['soil_id'] ? "value=" . $_GET['soil_id'] : "") . '>';
+					?>
 				</div>
 				<div style="padding-top: 10px;">
 					<input type="submit" name="deleteSoil" id="deleteSoil" value="Delete Soil" />

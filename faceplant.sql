@@ -171,6 +171,25 @@ create table favourites
 create index favourites_fk1 on favourites(user_id);
 create index favourites_fk2 on favourites(plant_id);
 
+alter table plants
+  add colour_count integer default 0;
+
+create or replace trigger has_colour_bir
+  after insert on has_colour
+  for each row
+
+begin
+  update plants
+  set colour_count = colour_count + 1
+  where plant_id = :new.plant_id;
+end;
+/
+
+alter table plants
+  add constraint PLANT_CHK_HAS_COLOUR 
+  check (colour_count > 0)
+  DEFERRABLE INITIALLY DEFERRED;
+
 insert into admins values ('admin', 'admin');
 
 insert into colours values ('red');
@@ -329,7 +348,7 @@ INSERT INTO PLANTS (SCI_NAME, COM_NAME, CULTIVAR, EDIBLE, MEDICINAL, PETSAFE, DE
 
 INSERT INTO PLANTS (SCI_NAME, COM_NAME, CULTIVAR, EDIBLE, MEDICINAL, PETSAFE, DESCRIPTION, HEIGHT, WIDTH, CLIMATE_ID, SOIL_ID) VALUES ('Helianthus annus', 'Sunflower', 'Tohokujhae', 'Y', 'Y', 'Y', 'A tall North American plant of the daisy family, with very large golden-rayed flowers. ', 'H', 'M', '1', '1');
 
-INSERT INTO PLANTS (SCI_NAME, COM_NAME, CULTIVAR, EDIBLE, MEDICINAL, PETSAFE, DESCRIPTION, HEIGHT, WIDTH, CLIMATE_ID, SOIL_ID) VALUES ('Lathyrus odoratus', 'Sweet Oea', 'Erewhon', 'N', 'N', 'N', 'A climbing plant of the legume family having sweet-scented flowers. ', 'H', 'M', '2', '2');
+INSERT INTO PLANTS (SCI_NAME, COM_NAME, CULTIVAR, EDIBLE, MEDICINAL, PETSAFE, DESCRIPTION, HEIGHT, WIDTH, CLIMATE_ID, SOIL_ID) VALUES ('Lathyrus odoratus', 'Sweet Pea', 'Erewhon', 'N', 'N', 'N', 'A climbing plant of the legume family having sweet-scented flowers. ', 'H', 'M', '2', '2');
 
 INSERT INTO PLANTS (SCI_NAME, COM_NAME, CULTIVAR, EDIBLE, MEDICINAL, PETSAFE, DESCRIPTION, HEIGHT, WIDTH, CLIMATE_ID, SOIL_ID) VALUES ('Lathyrus odoratus', 'Sweet Pea', 'Jewels of Albion', 'N', 'N', 'N', 'A climbing plant of the legume family having sweet-scented flowers. ', 'H', 'M', '2', '2');
 
